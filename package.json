@@ -16,7 +16,7 @@
     "name": "Aurélien Cros",
     "email": "aure.cros@gmail.com"
   },
-  "license": "MIT",
+  "license": "",
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
