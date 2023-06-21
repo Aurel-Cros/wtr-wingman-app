@@ -1,0 +1,51 @@
+body {
+    background-color: #000614;
+}
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100svw;
+    height: 100svh;
+    z-index: -1;
+}
+#background::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.1;
+    background-image: url('../assets/images/tiger-invert-pink.png');
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    animation: bgbreath 25s infinite;
+    content: " ";
+    overflow: hidden
+}
+@keyframes bgbreath {
+    0% {
+        background-size: 100%;
+    }
+    90% {
+        background-size: 100%;
+        transform: rotate(0deg);
+        opacity: 0.1;
+    }
+    93% {
+        background-size: 90%;
+        transform: rotate(-10deg);
+        opacity: 0.01;
+    }
+    94% {
+        background-size: 115%;
+        transform: rotate(5deg);
+        opacity: 0.25;
+    }
+    95% {
+        background-size: 115%;
+        transform: rotate(5deg);
+        opacity: 0.25;
+    }
+}
