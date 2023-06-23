@@ -10,8 +10,8 @@ const root = createRoot(domRoot);
 function App() {
     return (
         <React.Fragment>
-            <NavBar></NavBar>
-            <SideBar></SideBar>
+            <NavBar />
+            <SideBar />
             <h1>This comes from React, bitches !</h1>
         </React.Fragment>
     );

@@ -6,6 +6,6 @@ export default function NavBar() {
             <a href="#">Weather</a>
             <a href="#">Strategy</a>
             <a href="#">Telemetry</a>
-        </div>
+        </div >
     )
 }
