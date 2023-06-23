@@ -1,6 +1,13 @@
+$main-text: #F0F0F0;
+
 body {
     font-family: 'Montserrat', Roboto, Arial, sans-serif;
     margin: 0;
+    color: $main-text;
+}
+
+a {
+    color: $main-text;
 }
 
 #navBar {
