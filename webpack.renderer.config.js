@@ -10,8 +10,15 @@ rules.push(
     use: ['style-loader', 'css-loader', 'sass-loader']
   },
   {
-    test: /\.(svg|jpg|png|webp)$/i,
-    type: 'asset/resource'
+    test: /\.(jpg|png|webp)$/i,
+    type: 'asset/resource',
+    generator: {
+      filename: 'assets/[name][ext]'
+    }
+  },
+  {
+    test: /\.svg$/i,
+    type: 'asset/inline',
   });
 
 module.exports = {

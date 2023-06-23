@@ -1,0 +1,53 @@
+@mixin Glassmorph {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: transparent;
+}
+
+$main-text: #D1D1D1;
+
+body {
+    font-family: Montserrat, Roboto, Arial, sans-serif;
+    margin: 0;
+    color: $main-text;
+}
+
+#side-bar {
+    @include Glassmorph();
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+
+    padding: 0.8rem;
+
+    h2 {
+        margin: 0;
+        padding: 0;
+
+    }
+
+}
+
+.panel-fold-btn {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../assets/icons/arrow-left.svg');
+    background-position: 50%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0.8rem;
+    top: 0.8rem;
+}
+
+#nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}

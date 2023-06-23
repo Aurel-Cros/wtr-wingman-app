@@ -5,8 +5,8 @@
  *
  * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
  */
-
-import './render/styles/main.scss';
+import './render/styles/layout.scss';
+import './render/styles/text.scss';
 import './render/styles/background.scss';
 import './common/util';
 import './render/app.jsx';
