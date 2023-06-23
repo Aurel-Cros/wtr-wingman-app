@@ -26,11 +26,9 @@
  * ```
  */
 
-import './styles/index.scss';
-import './styles/main.scss';
-import './styles/background.scss';
+import './render/styles/main.scss';
+import './render/styles/background.scss';
 import './common/util';
-import './netcode/WebSocket';
-import './app.jsx';
+import './render/app.jsx';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
