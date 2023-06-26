@@ -11,7 +11,7 @@ function App() {
     return (
         <React.Fragment>
             <NavBar />
-            <SideBar username={localStorage.getItem('username')}></SideBar>
+            <SideBar />
             <h1>This comes from React, bitches !</h1>
         </React.Fragment>
     );

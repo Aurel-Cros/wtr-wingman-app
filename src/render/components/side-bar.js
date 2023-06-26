@@ -1,7 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 
-function SideBar(options) {
+function SideBar() {
+    const username = localStorage.getItem('username') || "";
+    const timeFormat = localStorage.getItem('time-format') || 24;
+    const speedUnit = localStorage.getItem('speed-unit') || "kph";
+    const sendingRate = localStorage.getItem('sending-rate') || 100;
+
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
 
@@ -28,17 +33,17 @@ function SideBar(options) {
             </button>
             <div id="side-bar" className={isClosing ? "close" : null}>
 
-                {console.log("Render !")}
+                {console.log("Render side bar !")}
                 <button onClick={() => transitionOff()} className="panel-fold-btn"></button>
                 <h2>Settings</h2>
                 <label id="username">
                     Username :
                     <input type="text"
                         id="usernameInput"
-                        value={options.username}
+                        defaultValue={username}
                         onChange={(e) => {
                             localStorage.setItem('username', e.target.value);
-                            app.username = e.target.value;
+                            window.settings.setUsername(e.target.value);
                         }}
                     />
                 </label>
@@ -47,7 +52,7 @@ function SideBar(options) {
 
                 <label id="time-format">
                     Time Format :
-                    <select value={localStorage.getItem('time-format') || 24}
+                    <select defaultValue={timeFormat}
                         onChange={(e) => { localStorage.setItem('time-format', e.target.value) }}>
                         <option value="24">24:00</option>
                         <option value="12">12:00am</option>
@@ -56,7 +61,7 @@ function SideBar(options) {
 
                 <label id="speed-unit">
                     Speed Unit :
-                    <select value={localStorage.getItem('speed-unit') || 'kph'}
+                    <select defaultValue={speedUnit}
                         onChange={(e) => { localStorage.setItem('speed-unit', e.target.value) }}>
                         <option>kph</option>
                         <option>mph</option>
@@ -67,7 +72,7 @@ function SideBar(options) {
 
                 <label id="sending-rate">
                     Sending Rate :
-                    <select value={localStorage.getItem('sending-rate') || 100}
+                    <select defaultValue={sendingRate}
                         onChange={(e) => { localStorage.setItem('sending-rate', e.target.value) }}>
                         <option value="100">100 hz</option>
                         <option value="60">60 hz</option>
