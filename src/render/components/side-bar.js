@@ -74,9 +74,9 @@ function SideBar() {
                     Sending Rate :
                     <select defaultValue={sendingRate}
                         onChange={(e) => { localStorage.setItem('sending-rate', e.target.value) }}>
-                        <option value="100">100 hz</option>
-                        <option value="60">60 hz</option>
                         <option value="10">10 hz</option>
+                        <option value="5">5 hz</option>
+                        <option value="1">1 hz</option>
                     </select>
                 </label>
                 <div>
