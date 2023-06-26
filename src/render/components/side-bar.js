@@ -36,7 +36,7 @@ function SideBar(options) {
                     <input type="text"
                         id="usernameInput"
                         value={options.username}
-                        onBlur={(e) => {
+                        onChange={(e) => {
                             localStorage.setItem('username', e.target.value);
                             app.username = e.target.value;
                         }}
@@ -47,7 +47,7 @@ function SideBar(options) {
 
                 <label id="time-format">
                     Time Format :
-                    <select value={localStorage.getItem('time-format')}
+                    <select value={localStorage.getItem('time-format') || 24}
                         onChange={(e) => { localStorage.setItem('time-format', e.target.value) }}>
                         <option value="24">24:00</option>
                         <option value="12">12:00am</option>
@@ -56,7 +56,7 @@ function SideBar(options) {
 
                 <label id="speed-unit">
                     Speed Unit :
-                    <select value={localStorage.getItem('speed-unit')}
+                    <select value={localStorage.getItem('speed-unit') || 'kph'}
                         onChange={(e) => { localStorage.setItem('speed-unit', e.target.value) }}>
                         <option>kph</option>
                         <option>mph</option>
@@ -67,7 +67,7 @@ function SideBar(options) {
 
                 <label id="sending-rate">
                     Sending Rate :
-                    <select value={localStorage.getItem('sending-rate')}
+                    <select value={localStorage.getItem('sending-rate') || 100}
                         onChange={(e) => { localStorage.setItem('sending-rate', e.target.value) }}>
                         <option value="100">100 hz</option>
                         <option value="60">60 hz</option>
