@@ -5,10 +5,12 @@
  *
  * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
  */
+import './render/styles/element.scss';
 import './render/styles/layout.scss';
 import './render/styles/text.scss';
 import './render/styles/background.scss';
+
 import './common/util';
-import './render/app.jsx';
+import './render/app';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
