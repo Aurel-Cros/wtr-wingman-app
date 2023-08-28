@@ -1,6 +1,9 @@
+@use './variables.scss' as v;
+
 body {
-    background-color: #000614;
+    background-color: v.$darkPurple;
 }
+
 #background {
     position: fixed;
     top: 0;
@@ -9,6 +12,7 @@ body {
     height: 100svh;
     z-index: -1;
 }
+
 #background::before {
     position: absolute;
     width: 100%;
@@ -24,25 +28,30 @@ body {
     content: " ";
     overflow: hidden
 }
+
 @keyframes bgbreath {
     0% {
         background-size: 100%;
     }
+
     90% {
         background-size: 100%;
         transform: rotate(0deg);
         opacity: 0.1;
     }
+
     93% {
         background-size: 90%;
         transform: rotate(-10deg);
         opacity: 0.01;
     }
+
     94% {
         background-size: 115%;
         transform: rotate(5deg);
         opacity: 0.25;
     }
+
     95% {
         background-size: 115%;
         transform: rotate(5deg);

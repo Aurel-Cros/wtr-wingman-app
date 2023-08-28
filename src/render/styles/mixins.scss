@@ -1,0 +1,17 @@
+@mixin GlassmorphMain {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(30px);
+    border: transparent;
+}
+
+@mixin GlassmorphMore {
+    background-color: rgba(122, 122, 122, 0.15);
+    backdrop-filter: blur(60px);
+}
+
+@mixin Button {
+    content: "";
+    background-position: 50%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}

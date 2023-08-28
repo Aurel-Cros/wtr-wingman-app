@@ -1,0 +1,42 @@
+@use 'mixins' as m;
+@use 'variables' as v;
+
+input {
+    @include m.GlassmorphMore;
+    font-family: Montserrat;
+    border: none;
+    border-radius: v.$borderRadius;
+    padding: 0.2rem 0.3rem;
+
+    color: v.$white1;
+    text-align: center;
+}
+
+select {
+    @include m.GlassmorphMore;
+    border: none;
+    border-radius: v.$borderRadius;
+    padding: 0.3rem 0.6rem;
+
+    font-family: Montserrat;
+    color: v.$white2;
+    text-align: center;
+
+    option {
+        color: v.$darkPurple;
+    }
+}
+
+.separator {
+    margin: 0 auto;
+    height: 1px;
+    width: 80%;
+    border: none;
+    background-color: v.$transPink;
+}
+
+button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}

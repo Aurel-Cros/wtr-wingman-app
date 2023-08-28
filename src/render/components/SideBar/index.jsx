@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 
+import './style.scss';
+
 function SideBar() {
-    const username = localStorage.getItem('username') || "";
+    const username = localStorage.getItem('username') || null;
     const timeFormat = localStorage.getItem('time-format') || 24;
     const speedUnit = localStorage.getItem('speed-unit') || "kph";
     const sendingRate = localStorage.getItem('sending-rate') || 100;
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [isClosing, setIsClosing] = useState(false);
 
     const transitionOn = () => {
@@ -26,7 +28,7 @@ function SideBar() {
     }
 
     return isOpen ?
-        <React.Fragment>
+        <>
             <button
                 className="open-settings-btn"
                 onClick={() => transitionOn()}>
@@ -84,7 +86,7 @@ function SideBar() {
                     <p>App version 3.0.a</p>
                 </div>
             </div>
-        </React.Fragment>
+        </>
         :
         <button
             className="open-settings-btn"
