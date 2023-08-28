@@ -26,6 +26,13 @@
 
     }
 }
+
+#app-info {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.8rem;
+}
+
 @keyframes OpenPanel {
     from {
         left: -101%;
@@ -70,5 +77,6 @@ label {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
 }

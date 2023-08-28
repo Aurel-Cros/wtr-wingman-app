@@ -9,7 +9,7 @@ function SideBar() {
     const speedUnit = localStorage.getItem('speed-unit') || "kph";
     const sendingRate = localStorage.getItem('sending-rate') || 100;
 
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
 
     const transitionOn = () => {
@@ -35,7 +35,11 @@ function SideBar() {
             </button>
             <div id="side-bar" className={isClosing ? "close" : null}>
 
-                {console.log("Render side bar !")}
+                <div id="app-info">
+                    <a href="#">Send a bug report</a>
+                    <p>App version 3.0.a</p>
+                </div>
+
                 <button onClick={() => transitionOff()} className="panel-fold-btn"></button>
                 <h2>Settings</h2>
                 <label id="username">
@@ -81,10 +85,6 @@ function SideBar() {
                         <option value="1">1 hz</option>
                     </select>
                 </label>
-                <div>
-                    <a href="#">Send a bug report</a>
-                    <p>App version 3.0.a</p>
-                </div>
             </div>
         </>
         :

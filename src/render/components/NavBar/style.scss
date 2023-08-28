@@ -15,10 +15,11 @@
         font-weight: 500;
         font-variant: small-caps;
         text-decoration: none;
+        border-radius: 20px;
+        transition: background-color 300ms linear;
 
         &.active {
-            @include m.GlassmorphMain;
-            border-radius: 20px;
+            @include m.GlassmorphMore;
         }
     }
 }
