@@ -12,5 +12,3 @@ import './render/styles/background.scss';
 
 import './common/util';
 import './render/app';
-
-console.log('👋 This message is being logged by "renderer.js", included via webpack');

@@ -5,3 +5,7 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('settings', {
     setUsername: (callback) => ipcRenderer.send('setUsername', callback)
 })
+
+contextBridge.exposeInMainWorld('dataAPI', {
+    onData: (callback) => ipcRenderer.on('data', callback)
+})
