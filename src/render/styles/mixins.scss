@@ -7,6 +7,7 @@
 @mixin GlassmorphMore {
     background-color: rgba(122, 122, 122, 0.15);
     backdrop-filter: blur(60px);
+    border: transparent;
 }
 
 @mixin Button {
@@ -14,4 +15,12 @@
     background-position: 50%;
     background-size: 100% auto;
     background-repeat: no-repeat;
+}
+
+@mixin Subtitle {
+    /* h3 */
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-weight: 500;
+    font-variant: all-small-caps;
 }

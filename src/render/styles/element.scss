@@ -16,11 +16,10 @@ select {
     @include m.GlassmorphMore;
     border: none;
     border-radius: v.$borderRadius;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem;
 
     font-family: Montserrat;
     color: v.$white2;
-    text-align: center;
 
     option {
         color: v.$darkPurple;
@@ -39,4 +38,10 @@ button {
     border: none;
     background: transparent;
     cursor: pointer;
+}
+
+.box {
+    @include m.GlassmorphMain;
+    border-radius: v.$borderRadius;
+    padding: 0.625rem;
 }

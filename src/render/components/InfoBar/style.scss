@@ -1,0 +1,142 @@
+@use '../../styles/mixins.scss' as m;
+@use '../../styles/variables.scss' as v;
+
+#info-bar {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 1.4rem 0rem;
+    padding: 0 0.25rem;
+}
+
+#time-info {
+    @include m.GlassmorphMain;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: v.$borderRadius;
+
+    >.time-row {
+        margin: 0;
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+#group-info {
+    @include m.GlassmorphMain;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .group-title {
+        @include m.Subtitle;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+
+        &::before {
+            display: inline-block;
+            content: "";
+            width: 1.25rem;
+            height: 1.1rem;
+            background-image: url('../../assets/icons/group.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .group-row {
+        display: flex;
+        align-items: center;
+        gap: 1.3rem;
+    }
+
+    #group-drivers {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        gap: 0.6rem;
+
+        .active {
+            color: v.$accentPurple;
+            font-weight: 600;
+            font-style: italic;
+        }
+    }
+
+    #group-car-track {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.6rem;
+
+        p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+
+            &#group-car {
+                &::before {
+                    display: inline-block;
+                    content: "";
+                    width: 1.5rem;
+                    height: 1rem;
+                    background-image: url('../../assets/icons/car.svg');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            &#group-track {
+                &::before {
+                    display: inline-block;
+                    content: "";
+                    width: 1.5rem;
+                    height: 1rem;
+                    background-image: url('../../assets/icons/track.svg');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+    }
+}
+
+#link-info {
+
+    p {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+
+        &::before {
+            display: inline-block;
+            content: "";
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            border: 1px solid v.$white1;
+            box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.25) inset, 2px 2px 4px 0px rgba(255, 255, 255, 0.25) inset;
+        }
+
+        &.connected::before {
+            background-color: v.$accentGreen;
+        }
+
+        &:not(.connected)::before {
+            background-color: v.$accentRed;
+        }
+    }
+}
