@@ -23,7 +23,13 @@ const createWindow = () => {
     // mainWindow.webContents.openDevTools();
 
     ipcMain.on('setUsername', (_event, name) => {
-        console.log(name);
+        console.log('Username: ', name);
+    })
+    ipcMain.on('setGroupName', (_event, name) => {
+        if (name)
+            console.log('Group name: ', name);
+        else
+            console.log('Quit group !')
     })
 
     setInterval(() => {
