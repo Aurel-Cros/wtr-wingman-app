@@ -27,6 +27,7 @@ const createWindow = () => {
     })
 
     setInterval(() => {
+        data.graphics.Clock += 10
         mainWindow.webContents.send('data', data);
     }, 5000);
 
