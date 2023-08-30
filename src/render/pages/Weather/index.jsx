@@ -1,4 +1,11 @@
-export default function Weather() {
+import { useContext } from "react";
+import { DataContext } from "../../utils/context";
+import CurrentWeather from "./CurrentWeather";
 
-    return <h1>Weather page</h1>
+export default function Weather() {
+    const { data } = useContext(DataContext);
+    console.log(data)
+    return <main>
+        <CurrentWeather weather={data.weather ?? {}}></CurrentWeather>
+    </main>
 }

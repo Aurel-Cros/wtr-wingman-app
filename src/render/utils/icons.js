@@ -1,12 +1,12 @@
-const path = "../assets/icons/"
-import sunny from path + "sunny.svg"
-import drizzle from path + "drizzle.svg"
-import lightRain from path + "light-rain.svg"
-import mediumRain from path + "medium-rain.svg"
-import heavyRain from path + "heavy-rain.svg"
-import thunderstorm from path + "thunderstorm.svg"
+import sunny from "../assets/icons/sunny.svg";
+import drizzle from "../assets/icons/drizzle.svg";
+import lightRain from "../assets/icons/light-rain.svg";
+import mediumRain from "../assets/icons/medium-rain.svg";
+import heavyRain from "../assets/icons/heavy-rain.svg";
+import thunderstorm from "../assets/icons/thunderstorm.svg";
+import tyre from "../assets/icons/tyre.svg";
 
-export default icons = {
+const icons = {
     weather: {
         sunny: sunny,
         drizzle: drizzle,
@@ -14,5 +14,7 @@ export default icons = {
         mediumRain: mediumRain,
         heavyRain: heavyRain,
         thunderstorm: thunderstorm
-    }
+    },
+    tyre: tyre
 }
+export default icons;

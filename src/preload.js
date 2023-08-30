@@ -7,5 +7,6 @@ contextBridge.exposeInMainWorld('settings', {
 })
 
 contextBridge.exposeInMainWorld('dataAPI', {
-    onData: (callback) => ipcRenderer.on('data', callback)
+    onTeleData: (callback) => ipcRenderer.on('telemetry', callback),
+    onWeatherData: (callback) => ipcRenderer.on('weather', callback)
 })

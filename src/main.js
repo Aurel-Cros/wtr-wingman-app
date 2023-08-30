@@ -27,8 +27,20 @@ const createWindow = () => {
     })
 
     setInterval(() => {
-        data.graphics.Clock += 10
-        mainWindow.webContents.send('data', data);
+        const weather = {
+            Clock: data.graphics.Clock,
+            rainIntensity: data.graphics.rainIntensity,
+            rainIntensityIn10min: data.graphics.rainIntensityIn10min,
+            rainIntensityIn30min: data.graphics.rainIntensityIn30min,
+            windDirection: data.graphics.windDirection,
+            windSpeed: data.graphics.windSpeed,
+            airTemp: data.physics.airTemp + Math.floor(Math.random() * 10),
+            roadTemp: data.physics.roadTemp + Math.floor(Math.random() * 10),
+            trackStatus: data.graphics.trackStatus.join('').toLowerCase(),
+            currentTyreSet: data.graphics.currentTyreSet,
+            rainTyres: data.graphics.rainTyres
+        }
+        mainWindow.webContents.send('weather', weather);
     }, 5000);
 
 };
