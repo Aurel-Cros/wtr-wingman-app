@@ -17,14 +17,12 @@ module.exports = [
     },
   },
   {
-    test: /\.jsx?$/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        exclude: /node_modules/,
-        presets: ['@babel/preset-react']
-      }
-    }
+    test: /\.(js|jsx)$/i,
+    exclude: /node_modules/,
+    resolve: {
+      extensions: [".js", ".jsx"]
+    },
+    loader: 'babel-loader'
   }
 
   // Put your webpack loader rules in this array.  This is where you would put
