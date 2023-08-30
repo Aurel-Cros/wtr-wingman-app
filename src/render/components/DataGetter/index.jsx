@@ -6,8 +6,20 @@ export function DataGetter() {
 
     useEffect(() => {
         window.dataAPI.onWeatherData((_e, newData) => {
-            setData({ ...data, weather: newData })
-            console.log(data);
-        })
-    }, []);
+            const updatedData = {
+                ...data,
+                weather: [
+                    newData,
+                    ...data.weather
+                ]
+            };
+            setData(updatedData);
+        });
+
+        window.dataAPI.onTeleData((_e, newData) => {
+            const updatedTelemetry = { ...data, telemetry: newData };
+            setData(updatedTelemetry);
+        });
+
+    }, [data]);
 }

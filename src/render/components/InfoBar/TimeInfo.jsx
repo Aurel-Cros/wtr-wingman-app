@@ -6,8 +6,8 @@ import TimeTicker from "./TimeTicker";
 export default function TimeInfo() {
     const { data } = useContext(DataContext);
 
-    const currentTime = Math.floor(data.graphics?.Clock) || -1;
-    const remainingTime = Math.floor(data.graphics?.sessionTimeLeft) || -1;
+    const currentTime = Math.floor(data.weather?.Clock) || -1;
+    const remainingTime = Math.floor(data.weather?.sessionTimeLeft) || -1;
 
     const lastUpdateTime = currentTime < 0 ? 0 : currentTime;
 

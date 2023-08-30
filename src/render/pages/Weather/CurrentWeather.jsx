@@ -1,11 +1,11 @@
 import icons from "../../utils/icons";
 
 export default function CurrentWeather(props) {
-    const weather = props.weather;
-    if (Object.keys(weather).length < 1)
+    if (props.weather.length < 1)
         return;
-
+    const weather = props.weather[0];
     const weatherDisplay = {}
+
     switch (weather.rainIntensity) {
         case 'ACC_NO_RAIN':
             weatherDisplay.name = 'clear';

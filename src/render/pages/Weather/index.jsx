@@ -4,8 +4,7 @@ import CurrentWeather from "./CurrentWeather";
 
 export default function Weather() {
     const { data } = useContext(DataContext);
-    console.log(data)
     return <main>
-        <CurrentWeather weather={data.weather ?? {}}></CurrentWeather>
+        <CurrentWeather weather={data.weather ?? []}></CurrentWeather>
     </main>
 }
