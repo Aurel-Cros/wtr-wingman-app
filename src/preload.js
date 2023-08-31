@@ -7,7 +7,15 @@ contextBridge.exposeInMainWorld('settings', {
     setGroupName: (callback) => ipcRenderer.send('setGroupName', callback)
 })
 
+const dataChannels = [
+    'telemetry',
+    'weather'
+]
 contextBridge.exposeInMainWorld('dataAPI', {
-    onTeleData: (callback) => ipcRenderer.on('telemetry', callback),
-    onWeatherData: (callback) => ipcRenderer.on('weather', callback)
+    onTeleData: (callback) => ipcRenderer.on(dataChannels[0], callback),
+    onWeatherData: (callback) => ipcRenderer.on(dataChannels[1], callback),
+    clear: (channels = []) => channels.forEach(channel => {
+        if (dataChannels.includes(channel))
+            ipcRenderer.removeAllListeners(channel)
+    })
 })
