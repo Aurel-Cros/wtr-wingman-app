@@ -17,4 +17,40 @@ const icons = {
     },
     tyre: tyre
 }
+
+export const getWeatherIcon = (weather) => {
+    const weatherDisplay = {};
+
+    switch (weather) {
+        case 'ACC_NO_RAIN':
+            weatherDisplay.name = 'Clear';
+            weatherDisplay.icon = icons.weather.sunny;
+            break;
+        case 'ACC_DRIZZLE':
+            weatherDisplay.name = 'Drizzle';
+            weatherDisplay.icon = icons.weather.drizzle;
+            break;
+        case 'ACC_LIGHT_RAIN':
+            weatherDisplay.name = 'Light rain';
+            weatherDisplay.icon = icons.weather.lightRain;
+            break;
+        case 'ACC_MEDIUM_RAIN':
+            weatherDisplay.name = 'Medium rain';
+            weatherDisplay.icon = icons.weather.mediumRain;
+            break;
+        case 'ACC_HEAVY_RAIN':
+            weatherDisplay.name = 'Heavy rain';
+            weatherDisplay.icon = icons.weather.heavyRain;
+            break;
+        case 'ACC_THUNDERSTORM':
+            weatherDisplay.name = 'Thunderstorm';
+            weatherDisplay.icon = icons.weather.thunderstorm;
+            break;
+        default:
+            weatherDisplay.name = '';
+            weatherDisplay.icon = null;
+    }
+
+    return weatherDisplay;
+}
 export default icons;

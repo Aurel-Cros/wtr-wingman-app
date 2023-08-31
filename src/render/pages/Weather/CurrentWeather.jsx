@@ -1,41 +1,13 @@
-import icons from "../../utils/icons";
+import icons, { getWeatherIcon } from "../../utils/icons";
 
-export default function CurrentWeather(props) {
-    if (props.weather.length < 1)
+export default function CurrentWeather({ data }) {
+    if (data.weather.length < 1)
         return;
-    const weather = props.weather[0];
-    const weatherDisplay = {}
+    const weather = data.weather[0];
+    const car = data.car
 
-    switch (weather.rainIntensity) {
-        case 'ACC_NO_RAIN':
-            weatherDisplay.name = 'clear';
-            weatherDisplay.icon = icons.weather.sunny;
-            break;
-        case 'ACC_DRIZZLE':
-            weatherDisplay.name = 'drizzle';
-            weatherDisplay.icon = icons.weather.drizzle;
-            break;
-        case 'ACC_LIGHT_RAIN':
-            weatherDisplay.name = 'light rain';
-            weatherDisplay.icon = icons.weather.lightRain;
-            break;
-        case 'ACC_MEDIUM_RAIN':
-            weatherDisplay.name = 'medium rain';
-            weatherDisplay.icon = icons.weather.mediumRain;
-            break;
-        case 'ACC_HEAVY_RAIN':
-            weatherDisplay.name = 'heavy rain';
-            weatherDisplay.icon = icons.weather.heavyRain;
-            break;
-        case 'ACC_THUNDERSTORM':
-            weatherDisplay.name = 'thunderstorm';
-            weatherDisplay.icon = icons.weather.thunderstorm;
-            break;
-        default:
-            weatherDisplay.name = '';
-            weatherDisplay.icon = null;
-    }
-    weatherDisplay.tyres = weather.rainTyres ? 'wets' : ('dry ' + weather.currentTyreSet);
+    const weatherDisplay = getWeatherIcon(weather.rainIntensity);
+    weatherDisplay.tyres = car.rainTyres ? 'Wet' : ('Dry ' + car.currentTyreSet);
 
     return (
         <div className="box data-box">

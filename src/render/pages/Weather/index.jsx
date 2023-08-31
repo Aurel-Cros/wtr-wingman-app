@@ -6,7 +6,7 @@ import WeatherHistory from "./WeatherHistory";
 export default function Weather() {
     const { data } = useContext(DataContext);
     return <main>
-        <CurrentWeather weather={data.weather ?? []}></CurrentWeather>
+        <CurrentWeather data={data ?? []}></CurrentWeather>
         <WeatherHistory data={data ?? []}></WeatherHistory>
     </main>
 }
