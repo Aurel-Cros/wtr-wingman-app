@@ -6,18 +6,27 @@ export const DataProvider = ({ children }) => {
     const [data, setData] = useState({
         telemetry: {},
         weather: [],
-        strategy: {}
+        strategy: {},
+        car: {}
     });
     const [settings, setSettings] = useState({});
-
     window.dataAPI.clear(['weather', 'telemetry']);
     window.dataAPI.onWeatherData((_e, newData) => {
         const updatedData = {
-            ...data,
             weather: [
-                newData,
+                ...newData.weather,
                 ...data.weather
-            ]
+            ],
+            // telemetry: [
+            //     ...newData.telemetry,
+            //     ...data.telemetry
+            // ],
+            // strategy: {
+            //     ...newData.strategy
+            // },
+            car: {
+                ...newData.car
+            }
         };
         setData(updatedData);
     });

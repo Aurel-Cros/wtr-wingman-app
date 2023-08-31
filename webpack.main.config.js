@@ -8,6 +8,7 @@ module.exports = {
   output: {
     clean: true,
   },
+  devtool: 'eval-source-map',
   // Put your normal webpack config below here
   module: {
     rules: require('./webpack.rules'),
