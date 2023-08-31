@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../utils/context";
 import { formatTime24 } from "../../../common/util";
 import TimeTicker from "./TimeTicker";
@@ -6,8 +6,8 @@ import TimeTicker from "./TimeTicker";
 export default function TimeInfo() {
     const { data } = useContext(DataContext);
 
-    const currentTime = Math.floor(data.weather?.Clock) || -1;
-    const remainingTime = Math.floor(data.weather?.sessionTimeLeft) || -1;
+    const currentTime = Math.floor(data.weather[0]?.eventTime) || -1;
+    const remainingTime = Math.floor(data.weather[0]?.sessionTimeLeft) || -1;
 
     const lastUpdateTime = currentTime < 0 ? 0 : currentTime;
 

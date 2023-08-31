@@ -6,15 +6,18 @@ export default function TimeTicker({ $time, asc = true }) {
     const [time, setTime] = useState(0);
     const factor = asc ? 1 : -1;
 
+    const tickTime = () => {
+        $time += factor
+        if ($time !== time) {
+            setTime($time);
+        }
+    }
+
     useEffect(() => {
         if ($time < 0)
             return;
 
-        let newTime = Math.floor($time);
-        const tick = setInterval(() => {
-            newTime += factor
-            setTime(newTime);
-        }, 1000)
+        const tick = setInterval(tickTime, 1000)
         return () => clearInterval(tick)
     }, [$time])
 
