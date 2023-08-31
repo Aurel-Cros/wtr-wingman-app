@@ -11,3 +11,41 @@ main {
     flex-flow: column wrap;
     gap: 1.625rem;
 }
+
+.data-flex {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 1.25rem;
+    row-gap: 0.31rem;
+    margin: 0.5rem 0;
+
+}
+
+.data-row {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+
+}
+
+.data-col {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.25rem;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.gap-1 {
+    gap: 1rem;
+}

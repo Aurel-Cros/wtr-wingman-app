@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatTime24 } from "../../../common/util";
+import { formatTime } from "../../../common/util";
 
 export default function TimeTicker({ $time, asc = true }) {
 
@@ -21,5 +21,5 @@ export default function TimeTicker({ $time, asc = true }) {
         return () => clearInterval(tick)
     }, [$time])
 
-    return <>{formatTime24(time)}</>;
+    return <>{formatTime(time, 'skipH')}</>;
 }

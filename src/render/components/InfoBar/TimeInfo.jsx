@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../../utils/context";
-import { formatTime24 } from "../../../common/util";
+import { formatTime } from "../../../common/util";
 import TimeTicker from "./TimeTicker";
 
 export default function TimeInfo() {
@@ -14,17 +14,17 @@ export default function TimeInfo() {
     return (
         <div className="box" id="time-info">
             <div className="time-row">
-                <p className="label">Session current time :</p>
+                <p className="label">Current time :</p>
                 <p className="data"><TimeTicker $time={currentTime}></TimeTicker></p>
             </div>
             <div className="time-row">
-                <p className="label">Race time remaining :</p>
+                <p className="label">Time remaining :</p>
                 <p className="data"><TimeTicker $time={remainingTime} asc={false}></TimeTicker></p>
             </div>
             <div className="separator"></div>
             <div className="time-row">
-                <p className="label">Last update received :</p>
-                <p className="data">{formatTime24(lastUpdateTime)}</p>
+                <p className="label">Last update :</p>
+                <p className="data">{formatTime(lastUpdateTime, 'short')}</p>
             </div>
         </div>
     )

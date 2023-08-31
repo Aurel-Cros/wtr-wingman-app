@@ -1,22 +1,24 @@
-export const formatTime12 = (timestamp) => {
-    const hours = Math.trunc(timestamp / 3600);
-    let mins = Math.trunc((timestamp - hours * 3600) / 60);
-    const hoursN = hours > 0 ? (hours > 12 ? hours - 12 : hours) + ':' : '';
-    mins = mins < 10 ? "0" + mins : mins + ':';
-    let secs = (timestamp % 3600) % 60;
-    secs = secs < 10 ? "0" + secs : secs;
-    const amPm = hours > 11 ? "PM" : "AM";
-
-    return `${hoursN}${mins}${secs} ${amPm}`;
-}
-export const formatTime24 = (timestamp, timeInMs = true) => {
+export const formatTime = (timestamp, format = 'full', timeInMs = false,) => {
 
     const hours = Math.floor(timestamp / 3600 / (timeInMs ? 1000 : 1));
     const mins = Math.floor(timestamp % 3600 / 60);
     const seconds = Math.floor(timestamp % 3600 % 60);
-    const currentTime = (hours > 0 ? hours + ':' : '') + (mins < 10 ? '0' + mins : mins) + ':' + (seconds < 10 ? '0' + seconds : seconds);
 
+    const hoursOut = (format === 'skipH' && hours < 1) ? '' : (hours + ':');
+    const minsOut = mins < 10 ? '0' + mins : mins
+    const secsOut = format !== 'short' ? (':' + (seconds < 10 ? '0' + seconds : seconds)) : '';
+
+    const currentTime = hoursOut + minsOut + secsOut;
     return currentTime;
+}
+
+export const formatDuration = (duration, timeInMs = false) => {
+    const hours = Math.floor(duration / 3600 / (timeInMs ? 1000 : 1));
+    const mins = Math.floor(duration % 3600 / 60);
+    const seconds = Math.floor(duration % 3600 % 60);
+
+    const result = hours > 0 ? (hours + 'h' + mins) : (mins > 0 ? (mins + ' mins') : seconds + ' seconds');
+    return result;
 }
 
 export const formatWeather = (weather) => {
