@@ -2,20 +2,18 @@
 
 body {
     background-color: v.$darkPurple;
-
-    ::-webkit-scrollbar-thumb {
-        background: v.$white5;
-        width: 0.5rem;
-        border-radius: v.$borderRadius;
-    }
-
-    ::-webkit-scrollbar {
-        background: transparent;
-        width: 0.5rem;
-        border-radius: v.$borderRadius;
-    }
+}
+::-webkit-scrollbar-thumb {
+    background: v.$white5;
+    width: 0.5rem;
+    border-radius: v.$borderRadius;
 }
 
+::-webkit-scrollbar {
+    background: transparent;
+    width: 0.5rem;
+    border-radius: v.$borderRadius;
+}
 #background {
     position: fixed;
     top: 0;

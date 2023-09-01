@@ -1,4 +1,4 @@
-.history-list {
+.foldable {
     overflow-y: scroll;
     max-height: 250px;
     padding-right: 0.5rem;
@@ -8,4 +8,8 @@
     &.fold {
         max-height: 0px;
     }
+}
+
+.forecast-list {
+    flex-direction: column-reverse;
 }

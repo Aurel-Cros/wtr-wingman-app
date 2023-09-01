@@ -8,8 +8,18 @@ body {
 main {
     padding: 0 0.25rem;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
+    justify-content: center;
     gap: 1.625rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    .layout-col {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        gap: 1.625rem;
+    }
 }
 
 .data-flex {

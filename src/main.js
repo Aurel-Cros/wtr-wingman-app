@@ -33,7 +33,7 @@ const createWindow = () => {
     })
 
     setInterval(() => {
-        data.graphics.Clock += 5
+        data.graphics.Clock += Math.round(Math.random() * 60) - 30;
         const dataUpdate = {
             weather: [{
                 eventTime: Math.trunc(data.graphics.Clock),

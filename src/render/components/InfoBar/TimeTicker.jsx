@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { formatTime } from "../../../common/util";
 
-export default function TimeTicker({ $time, asc = true }) {
+export default function TimeTicker({ $time, asc = true, setter = null }) {
 
     const [time, setTime] = useState(0);
     const factor = asc ? 1 : -1;
 
     const tickTime = () => {
         $time += factor
-        if ($time !== time) {
+        if ($time !== time)
             setTime($time);
-        }
+        if (setter !== null)
+            setter($time)
     }
 
     useEffect(() => {

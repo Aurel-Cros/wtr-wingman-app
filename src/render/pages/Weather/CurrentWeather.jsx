@@ -10,7 +10,7 @@ export default function CurrentWeather({ data }) {
     weatherDisplay.tyres = car.rainTyres ? 'Wet' : ('Dry ' + car.currentTyreSet);
 
     return (
-        <div className="box data-box">
+        <div className="box data-box wide">
             <h2>Current weather</h2>
             <div className="data-row data">
                 <img src={weatherDisplay.icon} alt={`Current weather :${weatherDisplay.name} `} />

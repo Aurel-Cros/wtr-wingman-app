@@ -1,23 +1,24 @@
-import './style.scss';
-
-import { getWeatherIcon } from '../../utils/icons';
+import { useContext } from "react";
+import { getWeatherIcon } from "../../utils/icons";
+import { DataContext } from "../../utils/context";
 import { formatTime, formatDuration } from '../../../common/util'
-import { useContext, useState } from 'react';
-import { DataContext } from '../../utils/context';
 
-export default function WeatherHistory({ data }) {
-    const [isFolded, setFolded] = useState(false);
+export default function CurrentWeather({ data }) {
     const { currentTime } = useContext(DataContext);
+
+    if (data.weather.length < 1)
+        return;
 
     const weather = data.weather;
 
-    return weather.length > 0 && (
+    return (
         <div className="box data-box wide">
-            <h2 className='clickable' onClick={() => (setFolded(!isFolded))}>History</h2>
-            <div className={"data-col gap-1 foldable" + (isFolded ? " fold" : "")}>
+            <h2>Forecast <span className="data">at 30 mins</span></h2>
+            <div className="data-col gap-1 foldable forecast-list">
                 {
-                    weather.filter(event => event.eventTime < currentTime)
+                    weather.filter(event => event.eventTime > currentTime)
                         .map((event, i) => {
+
                             const previousEvent = weather[i - 1] || null;
                             const duration = previousEvent === null ? 'undetermined' : formatDuration(Number(previousEvent.eventTime) - Number(event.eventTime));
                             const weatherAssets = getWeatherIcon(event.rainIntensity)
@@ -31,9 +32,15 @@ export default function WeatherHistory({ data }) {
                                         <p className="subtext">
                                             Duration : {duration}
                                         </p>
+                                        <p className="subtext">
+                                            {
+                                                duration === 'undetermined' &&
+                                                `(min. ${Math.floor(((currentTime + 30 * 60) - event.eventTime) / 60)} mins)`
+                                            }
+                                        </p>
                                     </div>
                                     <p className="data">
-                                        {formatTime(event.eventTime, 'short')}
+                                        <span className="subtext">coming at </span>{formatTime(event.eventTime, 'short')}
                                     </p>
                                 </div>
                             )

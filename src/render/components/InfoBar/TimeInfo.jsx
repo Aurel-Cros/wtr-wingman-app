@@ -4,18 +4,18 @@ import { formatTime } from "../../../common/util";
 import TimeTicker from "./TimeTicker";
 
 export default function TimeInfo() {
-    const { data } = useContext(DataContext);
+    const { data, currentTime, setCurrentTime } = useContext(DataContext);
 
-    const currentTime = Math.floor(data.weather[0]?.eventTime) || -1;
+    const currentTimeLocal = currentTime || -1;
     const remainingTime = Math.floor(data.weather[0]?.sessionTimeLeft) || -1;
 
-    const lastUpdateTime = currentTime < 0 ? 0 : currentTime;
+    const lastUpdateTime = currentTimeLocal < 0 ? 0 : currentTimeLocal;
 
     return (
         <div className="box" id="time-info">
             <div className="time-row">
                 <p className="label">Current time :</p>
-                <p className="data"><TimeTicker $time={currentTime}></TimeTicker></p>
+                <p className="data"><TimeTicker $time={currentTimeLocal} setter={setCurrentTime}></TimeTicker></p>
             </div>
             <div className="time-row">
                 <p className="label">Time remaining :</p>

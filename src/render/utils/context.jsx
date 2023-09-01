@@ -10,6 +10,8 @@ export const DataProvider = ({ children }) => {
         car: {}
     });
     const [settings, setSettings] = useState({});
+    const [currentTime, setCurrentTime] = useState(-1);
+
     window.dataAPI.clear(['weather', 'telemetry']);
     window.dataAPI.onWeatherData((_e, newData) => {
         const updatedData = {
@@ -28,6 +30,7 @@ export const DataProvider = ({ children }) => {
                 ...newData.car
             }
         };
+        setCurrentTime(newData.weather[0].eventTime)
         setData(updatedData);
     });
     window.dataAPI.onTeleData((_e, newData) => {
@@ -37,7 +40,7 @@ export const DataProvider = ({ children }) => {
 
 
     return (
-        <DataContext.Provider value={{ data, setData, settings, setSettings }}>
+        <DataContext.Provider value={{ data, setData, settings, setSettings, currentTime, setCurrentTime }}>
             {children}
         </DataContext.Provider>
     )
