@@ -6,14 +6,14 @@ import { useContext, useState } from 'react';
 import { DataContext } from '../../utils/context';
 
 export default function WeatherHistory({ data }) {
-    const [isFolded, setFolded] = useState(false);
+    const [isFolded, setFolded] = useState(true);
     const { currentTime } = useContext(DataContext);
 
     const weather = data.weather;
 
     return weather.length > 0 && (
         <div className="box data-box wide">
-            <h2 className='clickable' onClick={() => (setFolded(!isFolded))}>History</h2>
+            <h2 className='clickable' onClick={() => (setFolded(!isFolded))}>{isFolded ? '↓' : '↑'} History</h2>
             <div className={"data-col gap-1 foldable" + (isFolded ? " fold" : "")}>
                 {
                     weather.filter(event => event.eventTime < currentTime)

@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { getWeatherIcon } from "../../utils/icons";
 import { DataContext } from "../../utils/context";
 import { formatTime, formatDuration } from '../../../common/util'
 
 export default function CurrentWeather({ data }) {
+    const [isFolded, setFolded] = useState(false);
     const { currentTime } = useContext(DataContext);
 
     if (data.weather.length < 1)
@@ -13,8 +14,8 @@ export default function CurrentWeather({ data }) {
 
     return (
         <div className="box data-box wide">
-            <h2>Forecast <span className="data">at 30 mins</span></h2>
-            <div className="data-col gap-1 foldable forecast-list">
+            <h2 className='clickable' onClick={() => (setFolded(!isFolded))}>{isFolded ? '↓' : '↑'} Forecast <span className="data">at 30 mins</span></h2>
+            <div className={"data-col gap-1 foldable forecast-list" + (isFolded ? " fold" : "")}>
                 {
                     weather.filter(event => event.eventTime > currentTime)
                         .map((event, i) => {

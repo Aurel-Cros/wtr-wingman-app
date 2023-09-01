@@ -9,9 +9,9 @@ export default function Weather() {
     return <main>
         <div className="layout-col">
             <CurrentWeather data={data ?? {}}></CurrentWeather>
-            <WeatherForecast data={data ?? {}}></WeatherForecast>
         </div>
         <div className="layout-col">
+            <WeatherForecast data={data ?? {}}></WeatherForecast>
             <WeatherHistory data={data ?? {}}></WeatherHistory>
         </div>
     </main>
