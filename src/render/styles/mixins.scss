@@ -5,8 +5,8 @@
 }
 
 @mixin GlassmorphMore {
-    background-color: rgba(122, 122, 122, 0.1);
-    backdrop-filter: blur(30px);
+    background-color: rgba(122, 122, 122, 0.3);
+    backdrop-filter: blur(16px);
     border: transparent;
 }
 

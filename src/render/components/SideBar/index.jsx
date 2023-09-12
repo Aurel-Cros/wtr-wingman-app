@@ -1,6 +1,5 @@
-import React from 'react';
 import { useState } from 'react';
-
+import logo from '../../assets/images/wingman-logo.png';
 import './style.scss';
 
 function SideBar() {
@@ -41,6 +40,7 @@ function SideBar() {
                 </div>
 
                 <button onClick={() => transitionOff()} className="panel-fold-btn"></button>
+                <img width="250" src={logo} alt="Wingman logo" />
                 <h2>Settings</h2>
                 <label id="username">
                     Username :
