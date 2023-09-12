@@ -1,0 +1,52 @@
+@use "../../styles/variables.scss" as v;
+
+.flag {
+    display: flex;
+    width: 5rem;
+    aspect-ratio: 4/2.3;
+    flex-flow: row wrap;
+    overflow: hidden;
+    gap: 0;
+    border-radius: 4px;
+    border: 1px solid #ffffff50;
+
+    &.green {
+        background-color: v.$accentGreen;
+    }
+
+    &.yellow {
+        background-color: v.$accentYellow;
+    }
+
+    &.red {
+        background-color: v.$accentRed;
+    }
+
+    &.blue {
+        background-color: v.$accentBlue;
+    }
+
+    &.orange {
+        background-color: black;
+        background: radial-gradient(circle, rgba(255, 119, 0, 1) 18%, transparent 19%);
+    }
+
+    &.white {
+        background-color: v.$white1;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        width: 0.713em;
+        aspect-ratio: 1;
+
+        &.color1 {
+            background-color: white;
+        }
+
+        &.color2 {
+            background-color: black;
+        }
+    }
+}
