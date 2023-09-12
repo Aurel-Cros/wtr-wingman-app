@@ -23,7 +23,7 @@ function App() {
                 <InfoBar />
                 <main>
                     <Routes>
-                        <Route path="/main_window" element={<Strategy />} />
+                        <Route path="/main_window" element={<Telemetry />} />
                         <Route path="/weather" element={<Weather />} />
                         <Route path="/strategy" element={<Strategy />} />
                         <Route path="/telemetry" element={<Telemetry />} />
