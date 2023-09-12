@@ -21,15 +21,15 @@ export default function CurrentWeather({ data }) {
                 {weatherDisplay.tyres}
             </div>
             <div className="data-flex">
-                <div className="data-col align-center">
+                <div className="layout-col">
                     <p className="label">Air temp</p>
                     <p className="data">{Math.round(weather.airTemp)}°C</p>
                 </div>
-                <div className="data-col align-center">
+                <div className="layout-col">
                     <p className="label">Track temp</p>
                     <p className="data">{Math.round(weather.roadTemp)}°C</p>
                 </div>
-                <div className="data-col align-center">
+                <div className="layout-col">
                     <p className="label">Wind</p>
                     <p className="data">{Math.round(weather.windSpeed)}m/s&nbsp;
                         <span style={{
@@ -38,7 +38,7 @@ export default function CurrentWeather({ data }) {
                         }}>↑</span>
                     </p>
                 </div>
-                <div className="data-col align-center">
+                <div className="layout-col">
                     <p className="label">Track state</p>
                     <p className="data">{weather.trackStatus}</p>
                 </div>

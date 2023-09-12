@@ -3,7 +3,7 @@ import PerTyre from '../../components/Data/PerTyre';
 
 export default function Tyres() {
     return (
-        <div className="box data-box data-col outer align-center">
+        <div className="box data-box layout-col outer">
             <h2>Tyres</h2>
             <div className="box data-box ">
                 <Lines data={[

@@ -2,7 +2,7 @@ import Lines from '../../components/Data/Lines';
 import PerTyre from '../../components/Data/PerTyre';
 export default function Brakes() {
     return (
-        <div className="box data-box data-col align-center outer">
+        <div className="box data-box layout-col  outer">
             <h2>Brakes</h2>
             <div className="box data-box">
                 <Lines data={[

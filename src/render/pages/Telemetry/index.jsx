@@ -6,15 +6,13 @@ export default function Telemetry() {
 
     return (
         <>
-            <>
-                <div className="layout-col">
-                    <Electronics />
-                    <Brakes />
-                </div>
-                <div className="layout-col">
-                    <Tyres />
-                </div>
-            </>
+            <div className="layout-col">
+                <Electronics />
+                <Brakes />
+            </div>
+            <div className="layout-col">
+                <Tyres />
+            </div>
         </>
     )
 }

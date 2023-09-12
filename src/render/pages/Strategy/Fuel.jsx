@@ -2,7 +2,7 @@ import Lines from '../../components/Data/Lines';
 
 export default function Fuel() {
     return (
-        <div className="box data-box data-col outer align-center">
+        <div className="box data-box layout-col outer">
             <h2>Fuel</h2>
             <div className="box data-box ">
                 <Lines data={[

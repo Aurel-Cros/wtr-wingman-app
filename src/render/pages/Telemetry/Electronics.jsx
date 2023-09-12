@@ -1,7 +1,7 @@
 import Lines from '../../components/Data/Lines';
 export default function Electronics() {
     return (
-        <div className="box data-box data-col align-center outer">
+        <div className="box data-box layout-col outer">
             <h2>Electronics</h2>
             <div className="box data-box">
                 <Lines data={[

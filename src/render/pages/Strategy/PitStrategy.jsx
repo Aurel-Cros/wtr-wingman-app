@@ -3,7 +3,7 @@ import PerTyre from '../../components/Data/PerTyre';
 
 export default function Strategy() {
     return (
-        <div className="box data-box data-col outer align-center">
+        <div className="box data-box layout-col outer">
             <h2>Pit strategy</h2>
             <div className="box data-box">
                 <Lines data={[
