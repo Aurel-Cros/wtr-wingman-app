@@ -21,12 +21,14 @@ function App() {
                 <NavBar />
                 <SideBar />
                 <InfoBar />
-                <Routes>
-                    <Route path="/main_window" element={<Weather />} />
-                    <Route path="/weather" element={<Weather />} />
-                    <Route path="/strategy" element={<Strategy />} />
-                    <Route path="/telemetry" element={<Telemetry />} />
-                </Routes>
+                <main>
+                    <Routes>
+                        <Route path="/main_window" element={<Strategy />} />
+                        <Route path="/weather" element={<Weather />} />
+                        <Route path="/strategy" element={<Strategy />} />
+                        <Route path="/telemetry" element={<Telemetry />} />
+                    </Routes>
+                </main>
             </DataProvider>
         </Router>
     );

@@ -6,7 +6,7 @@ import WeatherForecast from "./WeatherForecast";
 
 export default function Weather() {
     const { data } = useContext(DataContext);
-    return <main>
+    return <>
         <div className="layout-col">
             <CurrentWeather data={data ?? {}}></CurrentWeather>
         </div>
@@ -14,5 +14,5 @@ export default function Weather() {
             <WeatherForecast data={data ?? {}}></WeatherForecast>
             <WeatherHistory data={data ?? {}}></WeatherHistory>
         </div>
-    </main>
+    </>
 }

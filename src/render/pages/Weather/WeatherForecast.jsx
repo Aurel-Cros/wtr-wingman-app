@@ -12,6 +12,28 @@ export default function CurrentWeather({ data }) {
 
     const weather = data.weather;
 
+    function getTyreAdvice(data, weatherEvent, durationInS) {
+        // Nothing = 0 ; Dry = 1 ; Rain = 2
+        let recommend = 0;
+
+        const duration = Math.round(durationInS / 60);
+        const rainTyre = data.car.rainTyres;
+        const rain = weatherEvent.rainIntensity;
+
+        if (rain !== 'ACC_NO_RAIN' && rainTyre === false) {
+            if ((rain === 'ACC_LIGHT_RAIN' && duration > 15) ||
+                (rain === 'ACC_MEDIUM_RAIN' && duration > 10) ||
+                (rain === 'ACC_HEAVY_RAIN') ||
+                (rain === 'ACC_THUNDERSTORM'))
+                recommend = 2;
+        }
+        else if (rain === 'ACC_NO_RAIN' && rainTyre === true && duration > 15) {
+            recommend = 1;
+        }
+
+        return recommend;
+    }
+
     return (
         <div className="box data-box wide">
             <h2 className='clickable' onClick={() => (setFolded(!isFolded))}>{isFolded ? '↓' : '↑'} Forecast <span className="data">at 30 mins</span></h2>
@@ -33,12 +55,12 @@ export default function CurrentWeather({ data }) {
                                         <p className="subtext">
                                             Duration : {duration}
                                         </p>
-                                        <p className="subtext">
-                                            {
-                                                duration === 'undetermined' &&
-                                                `(min. ${Math.floor(((currentTime + 30 * 60) - event.eventTime) / 60)} mins)`
-                                            }
-                                        </p>
+                                        {
+                                            duration === 'undetermined' &&
+                                            <p className="subtext">
+                                                {`(min. ${Math.floor(((currentTime + 30 * 60) - event.eventTime) / 60)} mins)`}
+                                            </p>
+                                        }
                                     </div>
                                     <p className="data">
                                         <span className="subtext">coming at </span>{formatTime(event.eventTime, 'short')}

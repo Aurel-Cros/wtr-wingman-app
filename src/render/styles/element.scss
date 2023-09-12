@@ -52,6 +52,7 @@ button {
 }
 
 .data-box {
+    box-sizing: border-box;
     padding: 0.625rem;
 
     p {
@@ -60,6 +61,18 @@ button {
 
     &.wide {
         width: 350px;
+    }
+
+    &.inner {
+        width: 100%;
+    }
+
+    &.outer {
+        row-gap: 0.625rem;
+
+        h2 {
+            margin: 0;
+        }
     }
 }
 
@@ -75,5 +88,19 @@ button {
 
     &:active {
         scale: 1;
+    }
+}
+
+.tyres-flex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    row-gap: 0.3125rem;
+    column-gap: 0.5625rem;
+    margin-top: 0.25rem;
+
+    p {
+        width: 40%;
     }
 }
