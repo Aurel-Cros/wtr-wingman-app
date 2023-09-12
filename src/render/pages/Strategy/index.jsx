@@ -1,40 +1,24 @@
-import Lines from '../../components/Data/Lines';
-import PerTyre from '../../components/Data/PerTyre';
+import PitStrategy from './PitStrategy';
+import Fuel from './Fuel';
+import Tyres from './Tyres';
 
 export default function Strategy() {
     return (
-        <div className="box data-box data-col outer align-center">
-            <h2>Pit strategy</h2>
-            <div className="box data-box inner">
-                <Lines data={[
-                    {
-                        label: "Car damage",
-                        value: "0%"
-                    },
-                    {
-                        label: "Repair time",
-                        value: "0.0s"
-                    }
+        <>
+            <div className="layout-col">
+                <div className='box data-box data-col outer align-center'>
+                    <div>FLAG</div>
+                    <h2>Timings</h2>
+                </div>
+            </div>
+            <div className="layout-col">
+                <PitStrategy />
+            </div>
 
-                ]} />
+            <div className="layout-col">
+                <Fuel />
+                <Tyres />
             </div>
-            <div className="box data-box inner">
-                <Lines data={[
-                    {
-                        label: "Tyre selected",
-                        value: "Wet"
-                    }
-                ]} />
-                <PerTyre data={{
-                    label: "Selected Pressures",
-                    values: [
-                        "27.0",
-                        "27.0",
-                        "27.0",
-                        "27.0"
-                    ]
-                }} />
-            </div>
-        </div>
+        </>
     )
 }

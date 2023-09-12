@@ -54,6 +54,7 @@ button {
 .data-box {
     box-sizing: border-box;
     padding: 0.625rem;
+    width: 100%;
 
     p {
         margin: 0;
@@ -61,10 +62,6 @@ button {
 
     &.wide {
         width: 350px;
-    }
-
-    &.inner {
-        width: 100%;
     }
 
     &.outer {
