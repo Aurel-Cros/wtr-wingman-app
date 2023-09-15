@@ -42,10 +42,6 @@ export default function Strategy() {
                         value: "120L"
                     },
                     {
-                        label: "Fuel remaining",
-                        value: "99L"
-                    },
-                    {
                         label: "Fuel to add",
                         value: "120L"
                     },

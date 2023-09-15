@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import icons, { getWeatherIcon } from "../../utils/icons";
 
 export default function CurrentWeather({ data }) {
-    if (data.weather.length < 1)
-        return;
-    const weather = data.weather[0];
+    const ldata = useSelector(state => state.weather)
+
+    const weather = data.weather.length < 1 ? {} : data.weather[0];
     const car = data.car
 
     const weatherDisplay = getWeatherIcon(weather.rainIntensity);

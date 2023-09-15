@@ -7,9 +7,6 @@ export default function CurrentWeather({ data }) {
     const [isFolded, setFolded] = useState(false);
     const { currentTime } = useContext(DataContext);
 
-    if (data.weather.length < 1)
-        return;
-
     const weather = data.weather;
 
     function getTyreAdvice(data, weatherEvent, durationInS) {

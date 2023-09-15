@@ -8,12 +8,22 @@ contextBridge.exposeInMainWorld('settings', {
 })
 
 const dataChannels = [
-    'telemetry',
-    'weather'
+    'timeSync', // 0
+    'weatherEvent',
+    'weatherLiveData',
+    'telemetryElectronics',
+    'telemetryLiveData',
+    'timingsSync', // 5
+    'timingsLiveData',
+    'pitStratSync',
+    'fuelSync',
+    'tyresSync',
+    'tyresLive' // 10
 ]
 contextBridge.exposeInMainWorld('dataAPI', {
-    onTeleData: (callback) => ipcRenderer.on(dataChannels[0], callback),
+    onTimeSync: (callback) => ipcRenderer.on(dataChannels[0], callback),
     onWeatherData: (callback) => ipcRenderer.on(dataChannels[1], callback),
+    onTeleData: (callback) => ipcRenderer.on(dataChannels[4], callback),
     clear: (channels = []) => channels.forEach(channel => {
         if (dataChannels.includes(channel))
             ipcRenderer.removeAllListeners(channel)

@@ -1,12 +1,34 @@
 import { useState } from 'react';
 import logo from '../../assets/images/wingman-logo.png';
 import './style.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeName, changeSendingRate, changeSpeedUnit, changeTimeFormat } from '../../store/features/settingsSlice';
 
 function SideBar() {
-    const username = localStorage.getItem('username') || null;
-    const timeFormat = localStorage.getItem('time-format') || 24;
-    const speedUnit = localStorage.getItem('speed-unit') || "kph";
-    const sendingRate = localStorage.getItem('sending-rate') || 100;
+    const username = useSelector(state => state.settings.username);
+    const timeFormat = useSelector(state => state.settings.timeFormat);
+    const speedUnit = useSelector(state => state.settings.speedUnit);
+    const sendingRate = useSelector(state => state.settings.sendingRate);
+
+    const dispatch = useDispatch();
+
+    const updateUsername = (value) => {
+        localStorage.setItem('username', value);
+        window.settings.setUsername(value);
+        dispatch(changeName(value));
+    }
+    const updateTimeFormat = (value) => {
+        localStorage.setItem('time-format', value);
+        dispatch(changeTimeFormat(value));
+    }
+    const updateSpeedUnit = (value) => {
+        localStorage.setItem('speed-unit', value);
+        dispatch(changeSpeedUnit(value));
+    }
+    const updateSendingRate = (value) => {
+        localStorage.setItem('sending-rate', value);
+        dispatch(changeSendingRate(value));
+    }
 
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -47,10 +69,7 @@ function SideBar() {
                     <input type="text"
                         id="usernameInput"
                         defaultValue={username}
-                        onChange={(e) => {
-                            localStorage.setItem('username', e.target.value);
-                            window.settings.setUsername(e.target.value);
-                        }}
+                        onBlur={(e) => { updateUsername(e.target.value); }}
                     />
                 </label>
 
@@ -59,7 +78,7 @@ function SideBar() {
                 <label id="time-format">
                     Time Format :
                     <select defaultValue={timeFormat}
-                        onChange={(e) => { localStorage.setItem('time-format', e.target.value) }}>
+                        onChange={(e) => { updateTimeFormat(e.target.value) }}>
                         <option value="24">24:00</option>
                         <option value="12">12:00am</option>
                     </select>
@@ -68,7 +87,7 @@ function SideBar() {
                 <label id="speed-unit">
                     Speed Unit :
                     <select defaultValue={speedUnit}
-                        onChange={(e) => { localStorage.setItem('speed-unit', e.target.value) }}>
+                        onChange={(e) => { updateSpeedUnit(e.target.value) }}>
                         <option>kph</option>
                         <option>mph</option>
                     </select>
@@ -79,7 +98,7 @@ function SideBar() {
                 <label id="sending-rate">
                     Sending Rate :
                     <select defaultValue={sendingRate}
-                        onChange={(e) => { localStorage.setItem('sending-rate', e.target.value) }}>
+                        onChange={(e) => { updateSendingRate(e.target.value) }}>
                         <option value="10">10 hz</option>
                         <option value="5">5 hz</option>
                         <option value="1">1 hz</option>

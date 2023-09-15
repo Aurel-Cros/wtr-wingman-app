@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const data = require('../data-sample.json');
+const ACCNW = require('acc-node-wrapper');
+const wrapper = new ACCNW();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -31,28 +33,37 @@ const createWindow = () => {
         else
             console.log('Quit group !')
     })
-
+    /*
+    *   TEMPORARY FAKE DATA 
+    *   DATA STRUCTURE IS CORRECT
+    */
     setInterval(() => {
-        data.graphics.Clock += 5;
+        data.graphics.Clock += 301;
+        data.graphics.rainIntensity = data.graphics.rainIntensity === "ACC_NO_RAIN" ? "ACC_LIGHT_RAIN" : "ACC_NO_RAIN";
         const dataUpdate = {
-            weather: [{
-                eventTime: Math.trunc(data.graphics.Clock + Math.round(Math.random() * 60) - 30),
-                rainIntensity: data.graphics.rainIntensity,
-                rainIntensityIn10min: data.graphics.rainIntensityIn10min,
-                rainIntensityIn30min: data.graphics.rainIntensityIn30min,
-                windDirection: data.graphics.windDirection,
-                windSpeed: data.graphics.windSpeed,
-                airTemp: data.physics.airTemp + Math.floor(Math.random() * 10),
-                roadTemp: data.physics.roadTemp + Math.floor(Math.random() * 10),
-                trackStatus: data.graphics.trackStatus.join('').toLowerCase(),
-            }],
+            weather: {
+                event: {
+                    timestamp: Math.trunc(data.graphics.Clock + 1800),
+                    rainIntensity: data.graphics.rainIntensity
+                },
+                liveData: {
+                    windDirection: data.graphics.windDirection,
+                    windSpeed: data.graphics.windSpeed,
+                    airTemp: data.physics.airTemp + Math.floor(Math.random() * 10),
+                    roadTemp: data.physics.roadTemp + Math.floor(Math.random() * 10),
+                    trackStatus: data.graphics.trackStatus.join('').toLowerCase(),
+                }
+            },
             car: {
                 currentTyreSet: data.graphics.currentTyreSet,
                 rainTyres: data.graphics.rainTyres
             }
         }
-        mainWindow.webContents.send('weather', dataUpdate);
+        mainWindow.webContents.send('weather', dataUpdate.weather);
     }, 5000);
+
+    // wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
+    // wrapper.initBroadcastSDK("Max", "127.0.0.1", 9000, "123", "123", 1000, true);
 
 };
 
