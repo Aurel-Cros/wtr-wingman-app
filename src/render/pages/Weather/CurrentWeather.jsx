@@ -9,7 +9,7 @@ export default function CurrentWeather() {
 	const rainTyres = useSelector((state) => state.telemetry.tyres.rainTyres);
 
 	const currWeather = weather.events.length < 1 ? {} : weather.events[0];
-	const currLiveWeather = weather.liveData;
+	const weatherLiveData = weather.liveData;
 
 	const weatherDisplay = getWeatherIcon(currWeather.rainIntensity);
 	weatherDisplay.tyres = rainTyres ? "Wet" : "Dry " + currentTyreSet;
@@ -32,24 +32,24 @@ export default function CurrentWeather() {
 				<div className="layout-col">
 					<p className="label">Air temp</p>
 					<p className="data">
-						{Math.round(currLiveWeather.airTemp)}°C
+						{Math.round(weatherLiveData.airTemp)}°C
 					</p>
 				</div>
 				<div className="layout-col">
 					<p className="label">Track temp</p>
 					<p className="data">
-						{Math.round(currLiveWeather.roadTemp)}°C
+						{Math.round(weatherLiveData.roadTemp)}°C
 					</p>
 				</div>
 				<div className="layout-col">
 					<p className="label">Wind</p>
 					<p className="data">
-						{Math.round(currLiveWeather.windSpeed)}m/s&nbsp;
+						{Math.round(weatherLiveData.windSpeed)}m/s&nbsp;
 						<span
 							style={{
 								display: "inline-block",
 								rotate: `${
-									(currLiveWeather.windDirection * 180) /
+									(weatherLiveData.windDirection * 180) /
 									Math.PI
 								}deg`,
 							}}>
@@ -59,7 +59,7 @@ export default function CurrentWeather() {
 				</div>
 				<div className="layout-col">
 					<p className="label">Track state</p>
-					<p className="data">{currLiveWeather.trackStatus}</p>
+					<p className="data">{weatherLiveData.trackStatus}</p>
 				</div>
 			</div>
 		</div>

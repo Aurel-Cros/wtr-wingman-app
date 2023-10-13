@@ -14,7 +14,11 @@ export const weatherSlice = createSlice({
 	},
 	reducers: {
 		addWeatherEvent: (state, action) => {
-			state.events.push(action.payload);
+			const events = [...state.events, action.payload];
+			const sortedEvents = events.toSorted(
+				(a, b) => a.timestamp - b.timestamp
+			);
+			state.events = sortedEvents;
 		},
 		updateLiveData: (state, action) => {
 			state.liveData = action.payload;

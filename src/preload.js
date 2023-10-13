@@ -22,7 +22,8 @@ const dataChannels = [
 ];
 contextBridge.exposeInMainWorld("dataAPI", {
 	onTimeSync: (callback) => ipcRenderer.on(dataChannels[0], callback),
-	onWeatherData: (callback) => ipcRenderer.on(dataChannels[1], callback),
+	onWeatherEvent: (callback) => ipcRenderer.on(dataChannels[1], callback),
+	onWeatherLiveData: (callback) => ipcRenderer.on(dataChannels[2], callback),
 	onTeleData: (callback) => ipcRenderer.on(dataChannels[4], callback),
 	clear: (channels = []) =>
 		channels.forEach((channel) => {

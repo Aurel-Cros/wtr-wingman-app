@@ -17,7 +17,10 @@ export const infoSlice = createSlice({
 			state.info.duration = action.payload;
 		},
 		updateCurrentTime: (state, action) => {
-			state.info.currentTime = action.payload;
+			state.currentTime = action.payload;
+		},
+		updateTimeLeft: (state, action) => {
+			state.sessionTimeLeft = action.payload;
 		},
 	},
 });

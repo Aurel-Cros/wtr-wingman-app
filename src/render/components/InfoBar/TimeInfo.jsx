@@ -10,10 +10,12 @@ export default function TimeInfo() {
 	const sessionTimeLeft = useSelector((state) => state.info.sessionTimeLeft);
 	const lastUpdateTime = useSelector((state) => state.info.lastUpdateTime);
 
-	const remainingTime = Math.floor(sessionTimeLeft);
-
 	const setCurrentTime = (newCT) => {
 		dispatch(infoActions.updateCurrentTime(newCT));
+	};
+
+	const setTimeLeft = (newTL) => {
+		dispatch(infoActions.updateTimeLeft(newTL));
 	};
 
 	return (
@@ -29,7 +31,10 @@ export default function TimeInfo() {
 			<div className="time-row">
 				<p className="label">Time remaining :</p>
 				<p className="data">
-					<TimeTicker $time={remainingTime} asc={false}></TimeTicker>
+					<TimeTicker
+						$time={sessionTimeLeft}
+						asc={false}
+						setter={setTimeLeft}></TimeTicker>
 				</p>
 			</div>
 			<div className="separator"></div>

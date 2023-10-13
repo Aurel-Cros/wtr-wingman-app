@@ -9,7 +9,26 @@
 		max-height: 0px;
 	}
 }
-
+.weather-event {
+	width: 100%;
+	p {
+		margin: 0.3rem 0;
+		&.full {
+			width: 100%;
+		}
+	}
+}
+.weather-col {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.weather-row {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
 .forecast-list {
 	flex-direction: column-reverse;
 }

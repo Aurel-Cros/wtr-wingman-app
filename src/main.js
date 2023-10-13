@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const data = require("../data-sample.json");
 const ACCNW = require("acc-node-wrapper");
@@ -36,37 +36,40 @@ const createWindow = () => {
 	 *   DATA STRUCTURE IS CORRECT
 	 */
 	setInterval(() => {
-		data.graphics.Clock += 301;
-		data.graphics.rainIntensity =
-			data.graphics.rainIntensity === "ACC_NO_RAIN"
-				? "ACC_LIGHT_RAIN"
-				: "ACC_NO_RAIN";
+		data.graphics.rainIntensity = data.graphics.rainIntensity === "ACC_NO_RAIN" ? "ACC_LIGHT_RAIN" : "ACC_NO_RAIN";
 		const dataUpdate = {
 			weather: {
 				event: {
-					timestamp: Math.trunc(data.graphics.Clock + 1800),
+					timestamp: Math.trunc(data.graphics.Clock + (Math.random() * 2 < 1 ? 1800 : 600)),
 					rainIntensity: data.graphics.rainIntensity,
 				},
+			},
+		};
+		mainWindow.webContents.send("weatherEvent", dataUpdate.weather.event);
+	}, 5000);
+	setInterval(() => {
+		const dataUpdate = {
+			weather: {
 				liveData: {
 					windDirection: data.graphics.windDirection,
 					windSpeed: data.graphics.windSpeed,
-					airTemp:
-						data.physics.airTemp + Math.floor(Math.random() * 10),
-					roadTemp:
-						data.physics.roadTemp + Math.floor(Math.random() * 10),
-					trackStatus: data.graphics.trackStatus
-						.join("")
-						.toLowerCase(),
+					airTemp: data.physics.airTemp + Math.floor(Math.random() * 10),
+					roadTemp: data.physics.roadTemp + Math.floor(Math.random() * 10),
+					trackStatus: data.graphics.trackStatus.join("").toLowerCase(),
 				},
 			},
-			car: {
-				currentTyreSet: data.graphics.currentTyreSet,
-				rainTyres: data.graphics.rainTyres,
-			},
 		};
-		mainWindow.webContents.send("weatherEvent", dataUpdate.weather);
-		console.log("Sending some weather");
-	}, 5000);
+		mainWindow.webContents.send("weatherLiveData", dataUpdate.weather.liveData);
+	}, 1000);
+	setInterval(() => {
+		data.graphics.Clock += 60;
+		data.graphics.sessionTimeLeft -= 120;
+		const timeSync = {
+			currentTime: data.graphics.Clock,
+			sessionTimeLeft: data.graphics.sessionTimeLeft,
+		};
+		mainWindow.webContents.send("timeSync", timeSync);
+	}, 1000);
 
 	// wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
 	// wrapper.initBroadcastSDK("Max", "127.0.0.1", 9000, "123", "123", 1000, true);

@@ -1,4 +1,3 @@
-import "./style.scss";
 
 import {getWeatherIcon} from "../../utils/icons";
 import {formatTime, formatDuration} from "../../../common/util";
@@ -9,9 +8,7 @@ export default function WeatherHistory() {
 	const [isFolded, setFolded] = useState(true);
 
 	const currentTime = useSelector((state) => state.info.currentTime);
-	const weather = useSelector((state) => state.weather.events);
-
-	console.log(weather);
+	const weatherEvents = useSelector((state) => state.weather.events);
 
 	return (
 		<div className="box weather-box wide">
@@ -22,10 +19,10 @@ export default function WeatherHistory() {
 				className={
 					"weather-col gap-1 foldable" + (isFolded ? " fold" : "")
 				}>
-				{weather
+				{weatherEvents
 					.filter((event) => event.timestamp < currentTime)
 					.map((event, i) => {
-						const previousEvent = weather[i - 1] || null;
+						const previousEvent = weatherEvents[i - 1] || null;
 						const duration =
 							previousEvent === null
 								? "undetermined"
