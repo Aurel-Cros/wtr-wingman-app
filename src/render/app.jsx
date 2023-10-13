@@ -1,4 +1,3 @@
-import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Weather from "./pages/Weather";
@@ -11,27 +10,25 @@ import InfoBar from "./components/InfoBar";
 
 import store from "./store/store";
 import {Provider} from "react-redux";
-import {DataProvider} from "./utils/context";
+import DataHandler from "./store/DataHandler";
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<DataProvider>
-				<Router>
-					<NavBar />
-					<SideBar />
-					<InfoBar />
-					<main>
-						<Routes>
-							<Route path="/main_window" element={<Weather />} />
-							<Route path="/weather" element={<Weather />} />
-							<Route path="/strategy" element={<Strategy />} />
-							<Route path="/telemetry" element={<Telemetry />} />
-						</Routes>
-					</main>
-				</Router>
-			</DataProvider>
+			<DataHandler />
+			<Router>
+				<NavBar />
+				<SideBar />
+				<InfoBar />
+				<main>
+					<Routes>
+						<Route path="/main_window" element={<Weather />} />
+						<Route path="/weather" element={<Weather />} />
+						<Route path="/strategy" element={<Strategy />} />
+						<Route path="/telemetry" element={<Telemetry />} />
+					</Routes>
+				</main>
+			</Router>
 		</Provider>
 	);
 }
-

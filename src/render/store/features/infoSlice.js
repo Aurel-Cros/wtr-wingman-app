@@ -3,12 +3,13 @@ import {createSlice} from "@reduxjs/toolkit";
 export const infoSlice = createSlice({
 	name: "info",
 	initialState: {
-		duration: 0,
-		currentTime: 0,
-		lastUpdate: 0,
+		duration: -1,
+		currentTime: -1,
+		sessionTimeLeft: -1,
+		lastUpdate: -1,
 		drivers: [], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
 		currentDriver: null,
-		car: null,
+		carModel: null,
 		track: null,
 	},
 	reducers: {

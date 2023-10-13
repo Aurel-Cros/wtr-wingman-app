@@ -1,31 +1,32 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-const { contextBridge, ipcRenderer } = require('electron')
+const {contextBridge, ipcRenderer} = require("electron");
 
-contextBridge.exposeInMainWorld('settings', {
-    setUsername: (callback) => ipcRenderer.send('setUsername', callback),
-    setGroupName: (callback) => ipcRenderer.send('setGroupName', callback)
-})
+contextBridge.exposeInMainWorld("settings", {
+	setUsername: (callback) => ipcRenderer.send("setUsername", callback),
+	setGroupName: (callback) => ipcRenderer.send("setGroupName", callback),
+});
 
 const dataChannels = [
-    'timeSync', // 0
-    'weatherEvent',
-    'weatherLiveData',
-    'telemetryElectronics',
-    'telemetryLiveData',
-    'timingsSync', // 5
-    'timingsLiveData',
-    'pitStratSync',
-    'fuelSync',
-    'tyresSync',
-    'tyresLive' // 10
-]
-contextBridge.exposeInMainWorld('dataAPI', {
-    onTimeSync: (callback) => ipcRenderer.on(dataChannels[0], callback),
-    onWeatherData: (callback) => ipcRenderer.on(dataChannels[1], callback),
-    onTeleData: (callback) => ipcRenderer.on(dataChannels[4], callback),
-    clear: (channels = []) => channels.forEach(channel => {
-        if (dataChannels.includes(channel))
-            ipcRenderer.removeAllListeners(channel)
-    })
-})
+	"timeSync", // 0
+	"weatherEvent",
+	"weatherLiveData",
+	"telemetryElectronics",
+	"telemetryLiveData",
+	"timingsSync", // 5
+	"timingsLiveData",
+	"pitStratSync",
+	"fuelSync",
+	"tyresSync",
+	"tyresLive", // 10
+];
+contextBridge.exposeInMainWorld("dataAPI", {
+	onTimeSync: (callback) => ipcRenderer.on(dataChannels[0], callback),
+	onWeatherData: (callback) => ipcRenderer.on(dataChannels[1], callback),
+	onTeleData: (callback) => ipcRenderer.on(dataChannels[4], callback),
+	clear: (channels = []) =>
+		channels.forEach((channel) => {
+			if (dataChannels.includes(channel))
+				ipcRenderer.removeAllListeners(channel);
+		}),
+});

@@ -1,92 +1,97 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const data = require('../data-sample.json');
-const ACCNW = require('acc-node-wrapper');
+const {app, BrowserWindow, ipcMain} = require("electron");
+const path = require("path");
+const data = require("../data-sample.json");
+const ACCNW = require("acc-node-wrapper");
 const wrapper = new ACCNW();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-    app.quit();
+if (require("electron-squirrel-startup")) {
+	app.quit();
 }
 
 const createWindow = () => {
-    // Create the browser window.
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 1000,
-        webPreferences: {
-            preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
-        },
-    });
-    // and load the index.html of the app.
-    mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+	// Create the browser window.
+	const mainWindow = new BrowserWindow({
+		width: 800,
+		height: 1000,
+		webPreferences: {
+			preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+		},
+	});
+	// and load the index.html of the app.
+	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+	// Open the DevTools.
+	// mainWindow.webContents.openDevTools();
 
-    ipcMain.on('setUsername', (_event, name) => {
-        console.log('Username: ', name);
-    })
-    ipcMain.on('setGroupName', (_event, name) => {
-        if (name)
-            console.log('Group name: ', name);
-        else
-            console.log('Quit group !')
-    })
-    /*
-    *   TEMPORARY FAKE DATA 
-    *   DATA STRUCTURE IS CORRECT
-    */
-    setInterval(() => {
-        data.graphics.Clock += 301;
-        data.graphics.rainIntensity = data.graphics.rainIntensity === "ACC_NO_RAIN" ? "ACC_LIGHT_RAIN" : "ACC_NO_RAIN";
-        const dataUpdate = {
-            weather: {
-                event: {
-                    timestamp: Math.trunc(data.graphics.Clock + 1800),
-                    rainIntensity: data.graphics.rainIntensity
-                },
-                liveData: {
-                    windDirection: data.graphics.windDirection,
-                    windSpeed: data.graphics.windSpeed,
-                    airTemp: data.physics.airTemp + Math.floor(Math.random() * 10),
-                    roadTemp: data.physics.roadTemp + Math.floor(Math.random() * 10),
-                    trackStatus: data.graphics.trackStatus.join('').toLowerCase(),
-                }
-            },
-            car: {
-                currentTyreSet: data.graphics.currentTyreSet,
-                rainTyres: data.graphics.rainTyres
-            }
-        }
-        mainWindow.webContents.send('weather', dataUpdate.weather);
-    }, 5000);
+	ipcMain.on("setUsername", (_event, name) => {
+		console.log("Username: ", name);
+	});
+	ipcMain.on("setGroupName", (_event, name) => {
+		if (name) console.log("Group name: ", name);
+		else console.log("Quit group !");
+	});
+	/*
+	 *   TEMPORARY FAKE DATA
+	 *   DATA STRUCTURE IS CORRECT
+	 */
+	setInterval(() => {
+		data.graphics.Clock += 301;
+		data.graphics.rainIntensity =
+			data.graphics.rainIntensity === "ACC_NO_RAIN"
+				? "ACC_LIGHT_RAIN"
+				: "ACC_NO_RAIN";
+		const dataUpdate = {
+			weather: {
+				event: {
+					timestamp: Math.trunc(data.graphics.Clock + 1800),
+					rainIntensity: data.graphics.rainIntensity,
+				},
+				liveData: {
+					windDirection: data.graphics.windDirection,
+					windSpeed: data.graphics.windSpeed,
+					airTemp:
+						data.physics.airTemp + Math.floor(Math.random() * 10),
+					roadTemp:
+						data.physics.roadTemp + Math.floor(Math.random() * 10),
+					trackStatus: data.graphics.trackStatus
+						.join("")
+						.toLowerCase(),
+				},
+			},
+			car: {
+				currentTyreSet: data.graphics.currentTyreSet,
+				rainTyres: data.graphics.rainTyres,
+			},
+		};
+		mainWindow.webContents.send("weatherEvent", dataUpdate.weather);
+		console.log("Sending some weather");
+	}, 5000);
 
-    // wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
-    // wrapper.initBroadcastSDK("Max", "127.0.0.1", 9000, "123", "123", 1000, true);
-
+	// wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
+	// wrapper.initBroadcastSDK("Max", "127.0.0.1", 9000, "123", "123", 1000, true);
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-    createWindow();
+	createWindow();
 
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    app.on('activate', function () {
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
+	// On OS X it's common to re-create a window in the app when the
+	// dock icon is clicked and there are no other windows open.
+	app.on("activate", function () {
+		if (BrowserWindow.getAllWindows().length === 0) createWindow();
+	});
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+app.on("window-all-closed", () => {
+	if (process.platform !== "darwin") {
+		app.quit();
+	}
 });
 
 // In this file you can include the rest of your app's specific main process

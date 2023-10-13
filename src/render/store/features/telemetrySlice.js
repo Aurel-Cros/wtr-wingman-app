@@ -19,6 +19,8 @@ export const telemetrySlice = createSlice({
 		},
 		tyres: {
 			type: null,
+			currentSet: null,
+			rainTyres: null,
 			age: 0,
 			livePressures: [0, 0, 0, 0],
 			avgPressuresDuringStint: [0, 0, 0, 0],
