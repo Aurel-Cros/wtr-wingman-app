@@ -11,7 +11,7 @@ export default function Brakes() {
                         value: "91%"
                     },
                     {
-                        label: "Dics life",
+                        label: "Discs life",
                         value: "98%"
                     }
                 ]} />
