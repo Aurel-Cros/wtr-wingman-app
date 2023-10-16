@@ -49,7 +49,7 @@ export default function WeatherForecast() {
 
 						const duration =
 							nextEvent === null
-								? "undetermined"
+								? "TBD"
 								: formatDuration(Number(nextEvent.timestamp) - Number(event.timestamp));
 
 						const weatherAssets = getWeatherIcon(event.rainIntensity);
@@ -62,11 +62,11 @@ export default function WeatherForecast() {
 										<p>{weatherAssets.name}</p>
 										<p className="right full">
 											<span className="subtext">coming at </span>
-											{formatTime(event.timestamp, "short")}
+											{formatTime(event.timestamp)}
 										</p>
 									</div>
 									<p className="subtext">Duration : {duration}</p>
-									{duration === "undetermined" && (
+									{duration === "TBD" && (
 										<p className="subtext">
 											{`(min. ${formatDuration(currentTime + 30 * 60 - event.timestamp)})`}
 										</p>

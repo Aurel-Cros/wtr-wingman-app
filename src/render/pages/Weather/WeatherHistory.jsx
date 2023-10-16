@@ -25,7 +25,7 @@ export default function WeatherHistory() {
 						const nextEvent = weatherEvents[i + 1] || null;
 						const duration =
 							nextEvent === null
-								? "undetermined"
+								? "TBD"
 								: formatDuration(
 									Number(nextEvent.timestamp) -
 									Number(event.timestamp)
