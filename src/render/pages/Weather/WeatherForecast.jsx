@@ -44,9 +44,6 @@ export default function WeatherForecast() {
 
 						const nextEvent = weatherEvents[i + 1] || null;
 
-						console.log("This : ", event.timestamp);
-						console.log("Next : ", nextEvent?.timestamp);
-
 						const duration =
 							nextEvent === null
 								? "TBD"

@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const infoSlice = createSlice({
 	name: "info",
@@ -6,22 +6,26 @@ export const infoSlice = createSlice({
 		duration: -1,
 		currentTime: -1,
 		sessionTimeLeft: -1,
-		lastUpdate: -1,
+		lastUpdateTime: -1,
 		drivers: [], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
 		currentDriver: null,
 		carModel: null,
 		track: null,
 	},
 	reducers: {
-		setDuration: (state, action) => {
-			state.info.duration = action.payload;
+		setDuration: (state, { payload }) => {
+			state.duration = payload;
 		},
-		updateCurrentTime: (state, action) => {
-			state.currentTime = action.payload;
+		updateCurrentTime: (state, { payload }) => {
+			state.currentTime = payload;
+			console.log('Update current time');
 		},
-		updateTimeLeft: (state, action) => {
-			state.sessionTimeLeft = action.payload;
+		updateTimeLeft: (state, { payload }) => {
+			state.sessionTimeLeft = payload;
 		},
+		updateReceived: state => {
+			state.lastUpdateTime = state.currentTime;
+		}
 	},
 });
 

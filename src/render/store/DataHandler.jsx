@@ -10,9 +10,11 @@ export default function DataHandler() {
 	window.dataAPI.clear(["weather", "telemetry"]);
 	window.dataAPI.onWeatherEvent((_e, newWeather) => {
 		dispatch(weatherActions.addWeatherEvent(newWeather));
+		dispatch(infoActions.updateReceived());
 	});
 	window.dataAPI.onWeatherLiveData((_e, newWeather) => {
 		dispatch(weatherActions.updateLiveData(newWeather));
+		dispatch(infoActions.updateReceived());
 	});
 	window.dataAPI.onTimeSync((_e, time) => {
 		dispatch(infoActions.updateCurrentTime(time.currentTime));
@@ -22,8 +24,10 @@ export default function DataHandler() {
 	});
 	window.dataAPI.onTeleData((_e, newTelemetry) => {
 		dispatch(telemetryActions.updateLiveData(newTelemetry))
+		dispatch(infoActions.updateReceived());
 	});
 	window.dataAPI.OnTeleElectronics((_e, newElectronics) => {
 		dispatch(telemetryActions.updateElectronics(newElectronics))
+		dispatch(infoActions.updateReceived());
 	})
 }

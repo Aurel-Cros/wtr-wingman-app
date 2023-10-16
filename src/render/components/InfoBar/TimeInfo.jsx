@@ -1,7 +1,7 @@
-import {formatTime} from "../../../common/util";
-import {infoActions} from "../../store/features/infoSlice";
+import { formatTime } from "../../../common/util";
+import { infoActions } from "../../store/features/infoSlice";
 import TimeTicker from "./TimeTicker";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function TimeInfo() {
 	const dispatch = useDispatch();
@@ -24,8 +24,7 @@ export default function TimeInfo() {
 				<p className="label">Current time :</p>
 				<p className="data">
 					<TimeTicker
-						$time={currentTime}
-						setter={setCurrentTime}></TimeTicker>
+						$time={currentTime}></TimeTicker>
 				</p>
 			</div>
 			<div className="time-row">
@@ -33,14 +32,13 @@ export default function TimeInfo() {
 				<p className="data">
 					<TimeTicker
 						$time={sessionTimeLeft}
-						asc={false}
-						setter={setTimeLeft}></TimeTicker>
+						asc={false}></TimeTicker>
 				</p>
 			</div>
 			<div className="separator"></div>
 			<div className="time-row">
 				<p className="label">Last update :</p>
-				<p className="data">{formatTime(lastUpdateTime, "short")}</p>
+				<p className="data">{formatTime(lastUpdateTime)}</p>
 			</div>
 		</div>
 	);

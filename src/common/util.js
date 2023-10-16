@@ -1,4 +1,6 @@
 export const formatTime = (timestamp, format = "full", timeInMs = false) => {
+	if (timestamp === -1)
+		return "--:--"
 	const hours = Math.floor(timestamp / 3600 / (timeInMs ? 1000 : 1));
 	const mins = Math.floor((timestamp % 3600) / 60);
 	const seconds = Math.floor((timestamp % 3600) % 60);
@@ -23,16 +25,16 @@ export const formatDuration = (time, timeInMs = false) => {
 
 export const formatWeather = weather => {
 	/* 
-    ACC_NO_RAIN
-    ACC_DRIZZLE
-    ACC_LIGHT_RAIN
-    ACC_MEDIUM_RAIN
-    ACC_HEAVY_RAIN
-    ACC_THUNDERSTORM
-    => 
-    NO RAIN
-    etc
-    */
+	ACC_NO_RAIN
+	ACC_DRIZZLE
+	ACC_LIGHT_RAIN
+	ACC_MEDIUM_RAIN
+	ACC_HEAVY_RAIN
+	ACC_THUNDERSTORM
+	=> 
+	NO RAIN
+	etc
+	*/
 	return weather.substring(4).replace("_", " ");
 };
 export const getVersion = () => process.env.getVersion();
