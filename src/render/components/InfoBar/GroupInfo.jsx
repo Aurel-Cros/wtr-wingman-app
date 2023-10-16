@@ -1,22 +1,10 @@
+import { useSelector } from "react-redux";
+
 export default function GroupInfo() {
-    const drivers = [
-        {
-            name: "Driver 1",
-            active: false
-        },
-        {
-            name: "Driver 2",
-            active: true
-        },
-        {
-            name: "Driver 3",
-            active: false
-        }
-    ];
-    const car = "Ferrari 296 GT3";
-    const track = "Indianapolis Motorway";
-
-
+    const drivers = useSelector(state => state.info.drivers);
+    const currentDriverId = useSelector(state => state.info.currentDriverId);
+    const car = useSelector(state => state.info.carModel);
+    const track = useSelector(state => state.info.trackName);
 
     return (
         <div className="box" id="group-info">
@@ -24,11 +12,13 @@ export default function GroupInfo() {
             <div className="group-row">
                 <div id="group-drivers">
                     {
-                        drivers.map(driver => {
+                        drivers.length ? drivers.map(driver => {
                             return (
-                                <span key={driver.name} className={"subtext" + (driver.active ? " active" : '')}>{driver.name}</span>)
+                                <span key={driver.id} className={"subtext" + (driver.id === currentDriverId ? " active" : '')}>{driver.name}</span>)
                         }
                         )
+                            :
+                            <span>No driver found.</span>
                     }
                 </div>
                 <div id="group-car-track">

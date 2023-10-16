@@ -8,9 +8,9 @@ export const infoSlice = createSlice({
 		sessionTimeLeft: -1,
 		lastUpdateTime: -1,
 		drivers: [], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
-		currentDriver: null,
-		carModel: null,
-		track: null,
+		currentDriverId: null,
+		carModel: "Car model",
+		trackName: "Track name",
 	},
 	reducers: {
 		setDuration: (state, { payload }) => {
