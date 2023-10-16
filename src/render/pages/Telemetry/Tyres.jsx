@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import Lines from '../../components/Data/Lines';
 import PerTyre from '../../components/Data/PerTyre';
 
 export default function Tyres() {
+    const tyresData = useSelector(state => state.telemetry.tyres);
+
     return (
         <div className="box data-box layout-col outer">
             <h2>Tyres</h2>
@@ -12,11 +15,11 @@ export default function Tyres() {
                         <Lines data={[
                             {
                                 label: "Current tyre",
-                                value: "Dry"
+                                value: tyresData.rainTyres ? "Wet" : "Dry"
                             },
                             {
                                 label: "Tyre age",
-                                value: "164km"
+                                value: `${tyresData.age}km`
                             }
                         ]} />
                     </div>
@@ -24,10 +27,10 @@ export default function Tyres() {
                         <PerTyre data={{
                             label: "Core temp",
                             values: [
-                                "80°C",
-                                "80°C",
-                                "80°C",
-                                "80°C"
+                                tyresData.coreT[0] + "°C",
+                                tyresData.coreT[1] + "°C",
+                                tyresData.coreT[2] + "°C",
+                                tyresData.coreT[3] + "°C",
                             ]
                         }} />
                     </div>
@@ -38,10 +41,10 @@ export default function Tyres() {
                         <PerTyre data={{
                             label: "Wear",
                             values: [
-                                "2.98",
-                                "2.98",
-                                "2.98",
-                                "2.98"
+                                tyresData.wear[0] + "mm",
+                                tyresData.wear[1] + "mm",
+                                tyresData.wear[2] + "mm",
+                                tyresData.wear[3] + "mm",
                             ]
                         }} />
                     </div>
@@ -49,10 +52,10 @@ export default function Tyres() {
                         <PerTyre data={{
                             label: "Slip ratio",
                             values: [
-                                "0%",
-                                "0%",
-                                "0%",
-                                "0%"
+                                tyresData.slipRatio[0] + "%",
+                                tyresData.slipRatio[1] + "%",
+                                tyresData.slipRatio[2] + "%",
+                                tyresData.slipRatio[3] + "%",
                             ]
                         }} />
                     </div>
@@ -60,10 +63,10 @@ export default function Tyres() {
                         <PerTyre data={{
                             label: "Slip angle",
                             values: [
-                                "0°",
-                                "0°",
-                                "0°",
-                                "0°"
+                                tyresData.slipAngle[0] + "°",
+                                tyresData.slipAngle[1] + "°",
+                                tyresData.slipAngle[2] + "°",
+                                tyresData.slipAngle[3] + "°",
                             ]
                         }} />
                     </div>

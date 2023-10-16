@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import Lines from '../../components/Data/Lines';
 import PerTyre from '../../components/Data/PerTyre';
 export default function Brakes() {
+    const brakesData = useSelector(state => state.telemetry.brakes)
     return (
         <div className="box data-box layout-col  outer">
             <h2>Brakes</h2>
@@ -8,11 +10,11 @@ export default function Brakes() {
                 <Lines data={[
                     {
                         label: "Pads life",
-                        value: "91%"
+                        value: `${brakesData.life.pads}%`
                     },
                     {
                         label: "Discs life",
-                        value: "98%"
+                        value: `${brakesData.life.discs}%`
                     }
                 ]} />
             </div>
@@ -20,10 +22,10 @@ export default function Brakes() {
                 <PerTyre data={{
                     label: "Temperatures",
                     values: [
-                        "940°C",
-                        "940°C",
-                        "720°C",
-                        "720°C"
+                        `${brakesData.temps[0]}°C`,
+                        `${brakesData.temps[1]}°C`,
+                        `${brakesData.temps[2]}°C`,
+                        `${brakesData.temps[3]}°C`,
                     ]
                 }} />
             </div>

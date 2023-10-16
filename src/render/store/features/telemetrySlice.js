@@ -38,11 +38,8 @@ export const telemetrySlice = createSlice({
 			};
 		},
 		updateLiveData: (state, { payload }) => {
-			state.telemetry = {
-				...state.telemetry,
-				tyres: { ...payload.tyres },
-				brakes: { ...payload.brakes }
-			}
+			state.tyres = payload.tyres
+			state.brakes = payload.brakes
 		}
 	},
 });
