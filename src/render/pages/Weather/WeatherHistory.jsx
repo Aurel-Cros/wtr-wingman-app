@@ -1,8 +1,8 @@
 
-import {getWeatherIcon} from "../../utils/icons";
-import {formatTime, formatDuration} from "../../../common/util";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import { getWeatherIcon } from "../../utils/icons";
+import { formatTime, formatDuration } from "../../../common/util";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function WeatherHistory() {
 	const [isFolded, setFolded] = useState(true);
@@ -20,16 +20,16 @@ export default function WeatherHistory() {
 					"weather-col gap-1 foldable" + (isFolded ? " fold" : "")
 				}>
 				{weatherEvents
-					.filter((event) => event.timestamp < currentTime)
 					.map((event, i) => {
-						const previousEvent = weatherEvents[i - 1] || null;
+						if (event.timestamp > currentTime) return;
+						const nextEvent = weatherEvents[i + 1] || null;
 						const duration =
-							previousEvent === null
+							nextEvent === null
 								? "undetermined"
 								: formatDuration(
-										Number(previousEvent.timestamp) -
-											Number(event.timestamp)
-								  );
+									Number(nextEvent.timestamp) -
+									Number(event.timestamp)
+								);
 						const weatherAssets = getWeatherIcon(
 							event.rainIntensity
 						);

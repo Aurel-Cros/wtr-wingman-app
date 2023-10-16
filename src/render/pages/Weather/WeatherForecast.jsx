@@ -32,7 +32,6 @@ export default function WeatherForecast() {
 		return recommend;
 	}
 
-	console.log(weatherEvents);
 	return (
 		<div className="box weather-box wide">
 			<h2 className="clickable" onClick={() => setFolded(s => !s)}>
@@ -40,8 +39,9 @@ export default function WeatherForecast() {
 			</h2>
 			<div className={"weather-col gap-1 foldable" + (isFolded ? " fold" : "")}>
 				{weatherEvents
-					.filter(event => event.timestamp > currentTime)
 					.map((event, i) => {
+						if (event.timestamp < currentTime) return;
+
 						const nextEvent = weatherEvents[i + 1] || null;
 
 						console.log("This : ", event.timestamp);
