@@ -1,5 +1,8 @@
+import { useSelector } from 'react-redux';
 import Lines from '../../components/Data/Lines';
 export default function Electronics() {
+    const electronics = useSelector(state => state.telemetry.electronics);
+    console.log(electronics);
     return (
         <div className="box data-box layout-col outer">
             <h2>Electronics</h2>
@@ -7,19 +10,19 @@ export default function Electronics() {
                 <Lines data={[
                     {
                         label: "TC/TC2",
-                        value: "1 / 2"
+                        value: `${electronics.tc} / ${electronics.tc2}`
                     },
                     {
                         label: "ABS",
-                        value: "4"
+                        value: electronics.abs
                     },
                     {
                         label: "Brake bias",
-                        value: "51%"
+                        value: `${electronics.bbias}%`
                     },
                     {
                         label: "Engine map",
-                        value: "1"
+                        value: electronics.emap
                     }
                 ]} />
             </div>

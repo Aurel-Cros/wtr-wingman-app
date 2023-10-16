@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const weatherSlice = createSlice({
 	name: "weather",
@@ -15,13 +15,15 @@ export const weatherSlice = createSlice({
 	reducers: {
 		addWeatherEvent: (state, action) => {
 			const events = [...state.events, action.payload];
-			const sortedEvents = events.toSorted(
+			state.events = events.toSorted(
 				(a, b) => a.timestamp - b.timestamp
 			);
-			state.events = sortedEvents;
 		},
 		updateLiveData: (state, action) => {
-			state.liveData = action.payload;
+			state.liveData = {
+				...state.liveData,
+				...action.payload
+			}
 		},
 	},
 });

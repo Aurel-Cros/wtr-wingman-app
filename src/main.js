@@ -48,6 +48,54 @@ const createWindow = () => {
 		mainWindow.webContents.send("weatherEvent", dataUpdate.weather.event);
 	}, 5000);
 	setInterval(() => {
+		data.graphics.ABS += 1
+		data.graphics.TC += 1
+		data.graphics.TCCUT += 1
+		data.graphics.EngineMap += 1
+		data.physics.brakeBias += 0.005
+
+		const dataUpdate = {
+			telemetry: {
+				electronics: {
+					tc: data.graphics.TC,
+					tc2: data.graphics.TCCUT,
+					abs: data.graphics.ABS,
+					emap: data.graphics.EngineMap,
+					bbias: data.physics.brakeBias.toFixed(2),
+				},
+			},
+		};
+		mainWindow.webContents.send("telemetryElectronics", dataUpdate.telemetry.electronics);
+	}, 3000);
+	setInterval(() => {
+		const dataUpdate = {
+			telemetry: {
+				liveData: {
+					tyres: {
+						type: "Dry",
+						currentSet: 3,
+						rainTyres: false,
+						age: 24,
+						livePressures: [260, 260, 270, 270],
+						avgPressuresDuringStint: [260, 260, 270, 270],
+						wear: [10, 10, 10, 10],
+						coreT: [80, 80, 80, 80],
+						slipAngle: [0, 0, 0, 0],
+						slipRatio: [0, 0, 0, 0],
+					},
+					brakes: {
+						life: {
+							pads: 99,
+							discs: 99,
+						},
+						temps: [500, 500, 400, 400],
+					},
+				},
+			},
+		};
+		mainWindow.webContents.send("telemetryLiveData", dataUpdate.telemetry.liveData);
+	}, 1000);
+	setInterval(() => {
 		const dataUpdate = {
 			weather: {
 				liveData: {
@@ -63,7 +111,7 @@ const createWindow = () => {
 	}, 1000);
 	setInterval(() => {
 		data.graphics.Clock += 60;
-		data.graphics.sessionTimeLeft -= 120;
+		data.graphics.sessionTimeLeft -= 60;
 		const timeSync = {
 			currentTime: data.graphics.Clock,
 			sessionTimeLeft: data.graphics.sessionTimeLeft,

@@ -1,6 +1,7 @@
-import {useDispatch} from "react-redux";
-import {weatherActions} from "./features/weatherSlice";
-import {infoActions} from "./features/infoSlice";
+import { useDispatch } from "react-redux";
+import { weatherActions } from "./features/weatherSlice";
+import { infoActions } from "./features/infoSlice";
+import { telemetryActions } from "./features/telemetrySlice";
 
 export default function DataHandler() {
 	console.log("Data handler live");
@@ -19,6 +20,10 @@ export default function DataHandler() {
 			infoActions.updateTimeLeft(Math.floor(time.sessionTimeLeft - 810000))
 		);
 	});
-
-	return <></>;
+	window.dataAPI.onTeleData((_e, newTelemetry) => {
+		dispatch(telemetryActions.updateLiveData(newTelemetry))
+	});
+	window.dataAPI.OnTeleElectronics((_e, newElectronics) => {
+		dispatch(telemetryActions.updateElectronics(newElectronics))
+	})
 }

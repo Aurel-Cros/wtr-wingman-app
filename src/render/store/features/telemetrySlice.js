@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const telemetrySlice = createSlice({
 	name: "telemetry",
@@ -31,12 +31,19 @@ export const telemetrySlice = createSlice({
 		},
 	},
 	reducers: {
-		updateElectronics: (state, action) => {
-			state.telemetry.electronics = {
-				...state.telemetry.electronics,
-				...action.payload,
+		updateElectronics: (state, { payload }) => {
+			state.electronics = {
+				...state.electronics,
+				...payload,
 			};
 		},
+		updateLiveData: (state, { payload }) => {
+			state.telemetry = {
+				...state.telemetry,
+				tyres: { ...payload.tyres },
+				brakes: { ...payload.brakes }
+			}
+		}
 	},
 });
 
