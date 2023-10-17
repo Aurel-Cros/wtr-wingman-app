@@ -1,6 +1,5 @@
 export const formatTime = (timestamp, format = "full", timeInMs = false) => {
-	if (timestamp === -1)
-		return "--:--"
+	if (timestamp === -1) return "--:--";
 	const hours = Math.floor(timestamp / 3600 / (timeInMs ? 1000 : 1));
 	const mins = Math.floor((timestamp % 3600) / 60);
 	const seconds = Math.floor((timestamp % 3600) % 60);
@@ -20,6 +19,20 @@ export const formatDuration = (time, timeInMs = false) => {
 	const seconds = Math.floor((duration % 3600) % 60);
 
 	const result = hours > 0 ? hours + "h" + mins : mins > 0 ? mins + " mins" : seconds + " seconds";
+	return result;
+};
+
+export const formatLaptime = time => {
+	const mins = Math.floor(time / 1000 / 60);
+	const seconds = ((time / 1000) % 60).toFixed(3);
+
+	const result = mins + ":" + seconds;
+	return result;
+};
+
+export const formatDelta = (time, precision = 3) => {
+	const result =
+		time > 0 ? `+${time.toFixed(precision)}` : time === 0 ? time.toFixed(precision) : `-${time.toFixed(precision)}`;
 	return result;
 };
 

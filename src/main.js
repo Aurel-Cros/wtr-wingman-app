@@ -36,16 +36,20 @@ const createWindow = () => {
 	 *   DATA STRUCTURE IS CORRECT
 	 */
 	setInterval(() => {
-		data.graphics.ABS += 1
-		data.graphics.TC += 1
-		data.graphics.TCCUT += 1
-		data.graphics.EngineMap += 1
-		data.physics.brakeBias += 0.001
+		data.graphics.ABS += 1;
+		data.graphics.TC += 1;
+		data.graphics.TCCUT += 1;
+		data.graphics.EngineMap += 1;
+		data.physics.brakeBias += 0.001;
 
 		data.graphics.Clock += 1;
 		data.graphics.sessionTimeLeft -= 1;
 
 		const dataUpdate = {
+			strategy: {
+				flag: data.graphics.flag,
+				
+			},
 			weather: {
 				event: {
 					timestamp: Math.trunc(data.graphics.Clock + (Math.random() * 2 < 1 ? 1800 : 600)),
@@ -92,7 +96,7 @@ const createWindow = () => {
 			info: {
 				currentTime: data.graphics.Clock,
 				sessionTimeLeft: data.graphics.sessionTimeLeft,
-			}
+			},
 		};
 		mainWindow.webContents.send("weatherEvent", dataUpdate.weather.event);
 		mainWindow.webContents.send("weatherLiveData", dataUpdate.weather.liveData);

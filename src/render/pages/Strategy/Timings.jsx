@@ -1,60 +1,87 @@
+import { useSelector } from "react-redux";
 import Lines from "../../components/Data/Lines";
+import { formatDelta, formatDuration, formatLaptime, formatTime } from "../../../common/util";
 
 export default function Timings() {
-    // Get data
+	// Get data
+	const drivers = useSelector(state => state.info.drivers);
+	const currentDriverId = useSelector(state => state.info.currentDriverId);
+	const currentDriver = drivers.find(d => d.id === currentDriverId) || {
+		id: null,
+		name: "",
+		drivingTimeLeft: 0,
+	};
 
-    return (
-        <div className="box data-box layout-col outer">
-            <h2>Timings</h2>
-            <div className="box data-box">
-                <Lines data={[{
-                    label: "Current driver",
-                    value: "Driver 2"
-                },
-                {
-                    label: "Stint time remaining",
-                    value: "35:25"
-                }]} />
-            </div>
-            <div className="box data-box">
-                <Lines data={[{
-                    label: "Driver 1 time remaining",
-                    value: "168:35"
-                }, {
-                    label: "Driver 2 time remaining",
-                    value: "18:35"
-                }, {
-                    label: "Driver 3 time remaining",
-                    value: "48:35"
-                }]} />
-            </div>
-            <div className="box data-box">
-                <Lines data={[{
-                    label: "Best lap",
-                    value: "1:45.541"
-                }, {
-                    label: "Current lap",
-                    value: "1:12.984"
-                }, {
-                    label: "Current lap pred.",
-                    value: "1:46.541"
-                }, {
-                    label: "Delta to best",
-                    value: "+1.000",
-                    color: "red"
-                }]} />
-            </div>
-            <div className="box data-box">
-                <Lines data={[{
-                    label: "Gap to driver in front",
-                    value: "+7.941",
-                    color: "red"
-                }, {
-                    label: "Gap to driver behind",
-                    value: "-6.644",
-                    color: "green"
-                }]} />
-            </div>
-        </div>
-    )
+	const racingTimers = useSelector(state => state.strategy.racingTimers);
+
+	return (
+		<div className="box data-box layout-col outer">
+			<h2>Timings</h2>
+			<div className="box data-box">
+				<Lines
+					data={[
+						{
+							label: "Current driver",
+							value: currentDriver.name,
+						},
+						{
+							label: "Stint time remaining",
+							value: formatDuration(racingTimers.stintRemaining),
+						},
+					]}
+				/>
+			</div>
+			<div className="box data-box">
+				{drivers.length ? (
+					<Lines
+						data={drivers.map(driver => ({
+							label: `${driver.name} time remaining`,
+							value: driver.drivingTimeLeft,
+						}))}
+					/>
+				) : (
+					<p className="label">No driver found.</p>
+				)}
+			</div>
+			<div className="box data-box">
+				<Lines
+					data={[
+						{
+							label: "Best lap",
+							value: formatLaptime(racingTimers.bestLap),
+						},
+						{
+							label: "Current lap",
+							value: formatLaptime(racingTimers.currentLap),
+						},
+						{
+							label: "Current lap pred.",
+							value: formatLaptime(racingTimers.currentPred),
+						},
+						{
+							label: "Delta to best",
+							value: formatDelta(racingTimers.deltaToBest),
+							color: racingTimers.deltaToBest > 0 ? "green" : racingTimers.deltaToBest < 0 ? "red" : "",
+						},
+					]}
+				/>
+			</div>
+			<div className="box data-box">
+				<Lines
+					data={[
+						{
+							label: "Gap to driver in front",
+							value: formatDelta(racingTimers.gapToFront, 1),
+							color: racingTimers.gapToFront > 0 ? "green" : racingTimers.gapToFront < 0 ? "red" : "",
+						},
+						{
+							label: "Gap to driver behind",
+							value: formatDelta(racingTimers.gapToBehind, 1),
+							color: racingTimers.gapToBehind > 0 ? "green" : racingTimers.gapToBehind < 0 ? "red" : "",
+						},
+					]}
+				/>
+			</div>
+		</div>
+	);
 }

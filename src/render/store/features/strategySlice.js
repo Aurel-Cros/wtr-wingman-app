@@ -1,8 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const strategySlice = createSlice({
 	name: "strategy",
 	initialState: {
+		flag: "AC_NO_FLAG",
 		racingTimers: {
 			stintRemaining: 0,
 			bestLap: 0,
@@ -21,7 +22,12 @@ export const strategySlice = createSlice({
 			lastPitValues: [0, 0, 0, 0], // in psi*10 : 259 for 25.9 psi
 		},
 	},
-	reducers: {},
+	reducers: {
+		updateFlag: (state, { payload }) => {
+			state.flag = payload;
+		},
+		
+	},
 });
 
 export const strategyActions = strategySlice.actions;

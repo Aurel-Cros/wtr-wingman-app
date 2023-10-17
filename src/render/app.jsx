@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Weather from "./pages/Weather";
 import Telemetry from "./pages/Telemetry";
@@ -9,7 +9,7 @@ import SideBar from "./components/SideBar";
 import InfoBar from "./components/InfoBar";
 
 import store from "./store/store";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import DataHandler from "./store/DataHandler";
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
 				<InfoBar />
 				<main>
 					<Routes>
-						<Route path="/main_window" element={<Weather />} />
+						<Route path="/main_window" element={<Strategy />} />
 						<Route path="/weather" element={<Weather />} />
 						<Route path="/strategy" element={<Strategy />} />
 						<Route path="/telemetry" element={<Telemetry />} />
