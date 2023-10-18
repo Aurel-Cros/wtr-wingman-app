@@ -24,15 +24,15 @@ export const strategySlice = createSlice({
 				selectedType: "Wet",
 				pressures: [270, 270, 270, 270],
 			},
-			maxFuel: 120,
 			fuelToAdd: 120,
 			changeBrakes: false,
 			penaltyTime: 0,
 		},
 		fuel: {
-			usedThisStint: 0,
-			remaining: 0,
-			perLap: 0,
+			tankSize: 120,
+			usedThisStint: 60,
+			remaining: 60,
+			perLap: 3,
 		},
 		tyres: {
 			lastPitValues: [260, 250, 260, 250],
@@ -42,6 +42,27 @@ export const strategySlice = createSlice({
 	reducers: {
 		updateFlag: (state, { payload }) => {
 			state.flag = payload;
+		},
+		updateRacingTimers: (state, { payload }) => {
+			state.racingTimers = {
+				...state.racingTimers,
+				...payload,
+			};
+		},
+		updatePitMenu: (state, { payload }) => {
+			state.pitMenu = {
+				...state.pitMenu,
+				...payload,
+			};
+		},
+		updateFuel: (state, { payload }) => {
+			state.fuel = {
+				...state.fuel,
+				...payload,
+			};
+		},
+		updatePreviousPitValues: (state, { payload }) => {
+			state.tyres.lastPitValues = payload;
 		},
 	},
 });

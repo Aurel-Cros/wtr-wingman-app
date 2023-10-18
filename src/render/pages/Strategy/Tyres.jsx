@@ -17,7 +17,7 @@ export default function Tyres() {
 					data={[
 						{
 							label: "Current tyre",
-							value: currentTyre + (Number.isInteger(tyreSet) ? " "+tyreSet : ""),
+							value: currentTyre + (Number.isInteger(tyreSet) ? " " + tyreSet : ""),
 						},
 						{
 							label: "Tyre age",
@@ -30,7 +30,7 @@ export default function Tyres() {
 				<PerTyre
 					data={{
 						label: "Live pressures",
-						values: livePressures,
+						values: livePressures.map(a => (a / 10).toFixed(1)),
 					}}
 				/>
 			</div>
@@ -38,7 +38,7 @@ export default function Tyres() {
 				<PerTyre
 					data={{
 						label: "Avg pressures",
-						values: averagePressures,
+						values: averagePressures.map(a => (a / 10).toFixed(1)),
 					}}
 				/>
 			</div>
@@ -46,7 +46,7 @@ export default function Tyres() {
 				<PerTyre
 					data={{
 						label: "Last pit values",
-						values: lastPitValues,
+						values: lastPitValues.map(a => (a / 10).toFixed(1)),
 					}}
 				/>
 			</div>

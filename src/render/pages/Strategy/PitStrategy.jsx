@@ -5,6 +5,7 @@ import PerTyre from "../../components/Data/PerTyre";
 export default function Strategy() {
 	const pitMenu = useSelector(state => state.strategy.pitMenu);
 	const currentFuel = useSelector(state => state.strategy.fuel.remaining);
+	const maxFuel = useSelector(state => state.strategy.fuel.tankSize);
 
 	const brakesLife = useSelector(state => state.telemetry.brakes.life);
 
@@ -41,7 +42,7 @@ export default function Strategy() {
 				<PerTyre
 					data={{
 						label: "Selected Pressures",
-						values: pitMenu.tyres.pressures,
+						values: pitMenu.tyres.pressures.map(a => (a / 10).toFixed(1)),
 					}}
 				/>
 			</div>
@@ -50,7 +51,7 @@ export default function Strategy() {
 					data={[
 						{
 							label: "Tank size",
-							value: pitMenu.maxFuel + "L",
+							value: maxFuel + "L",
 						},
 						{
 							label: "Fuel to add",
@@ -58,7 +59,7 @@ export default function Strategy() {
 						},
 						{
 							label: "Fuel after pits",
-							value: Math.max(pitMenu.maxFuel, pitMenu.fuelToAdd + currentFuel) + "L",
+							value: Math.min(maxFuel, pitMenu.fuelToAdd + currentFuel).toFixed(0) + "L",
 						},
 					]}
 				/>

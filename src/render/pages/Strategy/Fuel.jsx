@@ -13,15 +13,15 @@ export default function Fuel() {
 					data={[
 						{
 							label: "Fuel used this stint",
-							value: fuel.usedThisStint + "L",
+							value: fuel.usedThisStint.toFixed(2) + "L",
 						},
 						{
 							label: "Fuel remaining",
-							value: fuel.remaining + "L",
+							value: fuel.remaining.toFixed(2) + "L",
 						},
 						{
 							label: "Fuel per lap",
-							value: fuel.perLap + "L",
+							value: fuel.perLap.toFixed(2) + "L",
 						},
 						{
 							label: "Laps remaining",

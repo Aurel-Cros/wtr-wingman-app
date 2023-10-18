@@ -35,7 +35,11 @@ const createWindow = () => {
 	 *   TEMPORARY FAKE DATA
 	 *   DATA STRUCTURE IS CORRECT
 	 */
+	let tempUp = 0;
+	let tempDn = 0;
 	setInterval(() => {
+		tempUp += 0.1;
+		tempDn -= 0.1;
 		data.graphics.ABS += 1;
 		data.graphics.TC += 1;
 		data.graphics.TCCUT += 1;
@@ -48,7 +52,10 @@ const createWindow = () => {
 		const dataUpdate = {
 			strategy: {
 				flag: data.graphics.flag,
-				
+				fuel: {
+					usedThisStint: 0 + tempUp,
+					remaining: 120 + tempDn,
+				},
 			},
 			weather: {
 				event: {
@@ -84,25 +91,29 @@ const createWindow = () => {
 						currentSet: 3,
 						rainTyres: false,
 						age: 24,
-						livePressures: [260, 260, 270, 270],
-						avgPressuresDuringStint: [260, 260, 270, 270],
 						wear: [10, 10, 10, 10],
 						coreT: [80, 80, 80, 80],
 						slipAngle: [1, 2, 3, 3],
 						slipRatio: [1, 2, 3, 3],
 					},
 				},
+				livePressures: [260 + tempUp, 260 + tempUp, 270 + tempUp, 270 + tempDn],
 			},
 			info: {
 				currentTime: data.graphics.Clock,
 				sessionTimeLeft: data.graphics.sessionTimeLeft,
 			},
 		};
-		mainWindow.webContents.send("weatherEvent", dataUpdate.weather.event);
-		mainWindow.webContents.send("weatherLiveData", dataUpdate.weather.liveData);
-		mainWindow.webContents.send("telemetryElectronics", dataUpdate.telemetry.electronics);
-		mainWindow.webContents.send("telemetryLiveData", dataUpdate.telemetry.liveData);
-		mainWindow.webContents.send("timeSync", dataUpdate.info);
+		// mainWindow.webContents.send("weatherEvent", dataUpdate.weather.event);
+		// mainWindow.webContents.send("weatherLiveData", dataUpdate.weather.liveData);
+		// mainWindow.webContents.send("telemetryElectronics", dataUpdate.telemetry.electronics);
+		// mainWindow.webContents.send("telemetryLiveData", dataUpdate.telemetry.liveData);
+		// mainWindow.webContents.send("timeSync", dataUpdate.info);
+		// mainWindow.webContents.send("fuelSync", dataUpdate.strategy.fuel);
+		mainWindow.webContents.send("tyresSync", {
+			timestamp: dataUpdate.info.currentTime,
+			pressures: dataUpdate.telemetry.livePressures,
+		});
 	}, 1000);
 
 	// wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
