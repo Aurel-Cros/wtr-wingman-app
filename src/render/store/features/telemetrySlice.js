@@ -54,6 +54,10 @@ export const telemetrySlice = createSlice({
 				.map(a => (a / state.tyres.pressuresHistory.length).toFixed(0));
 			state.tyres.avgPressuresDuringStint = avg;
 		},
+		resetAverage: state => {
+			state.tyres.avgPressuresDuringStint = [0, 0, 0, 0];
+			state.tyres.pressuresHistory = [];
+		},
 		updateElectronics: (state, { payload }) => {
 			state.electronics = {
 				...state.electronics,
@@ -61,8 +65,8 @@ export const telemetrySlice = createSlice({
 			};
 		},
 		updateLiveData: (state, { payload }) => {
-			state.tyres = payload.tyres;
-			state.brakes = payload.brakes;
+			state.tyres = { ...state.tyres, ...payload.tyres };
+			state.brakes = { ...state.brakes, ...payload.brakes };
 		},
 	},
 });

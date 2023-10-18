@@ -18,7 +18,7 @@ export const formatDuration = (time, timeInMs = false) => {
 	const mins = Math.floor((duration % 3600) / 60);
 	const seconds = Math.floor((duration % 3600) % 60);
 
-	const result = hours > 0 ? hours + "h" + mins : mins > 0 ? mins + " mins" : seconds + " seconds";
+	const result = hours > 0 ? hours + "h" + mins : mins > 0 ? mins + "m" : seconds + "s";
 	return result;
 };
 
