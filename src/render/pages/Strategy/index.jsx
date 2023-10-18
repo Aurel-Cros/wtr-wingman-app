@@ -11,6 +11,7 @@ export default function Strategy() {
                 <Flag />
                 <Timings />
             </div>
+            
             <div className="layout-col">
                 <PitStrategy />
             </div>

@@ -51,6 +51,10 @@ export default function Timings() {
 							value: formatLaptime(racingTimers.bestLap),
 						},
 						{
+							label: "Previous lap",
+							value: formatLaptime(racingTimers.previousLap),
+						},
+						{
 							label: "Current lap",
 							value: formatLaptime(racingTimers.currentLap),
 						},
