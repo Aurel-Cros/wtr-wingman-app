@@ -2,13 +2,21 @@ import { useSelector } from "react-redux";
 import icons, { getWeatherIcon } from "../../utils/icons";
 
 export default function CurrentWeather() {
+	const currentTime = useSelector(state => state.info.currentTime);
 	const weatherEvents = useSelector(state => state.weather.events);
 	const weatherLiveData = useSelector(state => state.weather.liveData);
 
 	const currentTyreSet = useSelector(state => state.telemetry.tyres.currentSet);
 	const rainTyres = useSelector(state => state.telemetry.tyres.rainTyres);
 
-	const currWeather = weatherEvents.length < 1 ? {} : weatherEvents[0];
+	const currWeather =
+		weatherEvents.length < 1
+			? {}
+			: weatherEvents
+					.toSorted((a, b) => a.timestamp - b.timestamp)
+					.find((a, i) => {
+						return a.timestamp < currentTime && weatherEvents[i + 1].timestamp > currentTime;
+					});
 
 	const weatherDisplay = getWeatherIcon(currWeather.rainIntensity);
 	weatherDisplay.tyres = rainTyres ? "Wet" : "Dry " + currentTyreSet;
