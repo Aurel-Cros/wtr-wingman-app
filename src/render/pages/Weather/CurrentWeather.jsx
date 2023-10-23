@@ -1,15 +1,14 @@
-import {useSelector} from "react-redux";
-import icons, {getWeatherIcon} from "../../utils/icons";
+import { useSelector } from "react-redux";
+import icons, { getWeatherIcon } from "../../utils/icons";
 
 export default function CurrentWeather() {
-	const weather = useSelector((state) => state.weather);
-	const currentTyreSet = useSelector(
-		(state) => state.telemetry.tyres.currentSet
-	);
-	const rainTyres = useSelector((state) => state.telemetry.tyres.rainTyres);
+	const weatherEvents = useSelector(state => state.weather.events);
+	const weatherLiveData = useSelector(state => state.weather.liveData);
 
-	const currWeather = weather.events.length < 1 ? {} : weather.events[0];
-	const weatherLiveData = weather.liveData;
+	const currentTyreSet = useSelector(state => state.telemetry.tyres.currentSet);
+	const rainTyres = useSelector(state => state.telemetry.tyres.rainTyres);
+
+	const currWeather = weatherEvents.length < 1 ? {} : weatherEvents[0];
 
 	const weatherDisplay = getWeatherIcon(currWeather.rainIntensity);
 	weatherDisplay.tyres = rainTyres ? "Wet" : "Dry " + currentTyreSet;
@@ -18,10 +17,7 @@ export default function CurrentWeather() {
 		<div className="box data-box wide">
 			<h2>Current weather</h2>
 			<div className="data-row data">
-				<img
-					src={weatherDisplay.icon}
-					alt={`Current weather :${weatherDisplay.name} `}
-				/>
+				<img src={weatherDisplay.icon} alt={`Current weather :${weatherDisplay.name} `} />
 				{weatherDisplay.name}
 			</div>
 			<div className="data-row data">
@@ -31,15 +27,11 @@ export default function CurrentWeather() {
 			<div className="data-flex">
 				<div className="layout-col">
 					<p className="label">Air temp</p>
-					<p className="data">
-						{Math.round(weatherLiveData.airTemp)}°C
-					</p>
+					<p className="data">{Math.round(weatherLiveData.airTemp)}°C</p>
 				</div>
 				<div className="layout-col">
 					<p className="label">Track temp</p>
-					<p className="data">
-						{Math.round(weatherLiveData.roadTemp)}°C
-					</p>
+					<p className="data">{Math.round(weatherLiveData.roadTemp)}°C</p>
 				</div>
 				<div className="layout-col">
 					<p className="label">Wind</p>
@@ -48,10 +40,7 @@ export default function CurrentWeather() {
 						<span
 							style={{
 								display: "inline-block",
-								rotate: `${
-									(weatherLiveData.windDirection * 180) /
-									Math.PI
-								}deg`,
+								rotate: `${(weatherLiveData.windDirection * 180) / Math.PI}deg`,
 							}}>
 							↑
 						</span>
