@@ -19,13 +19,13 @@ export default function CurrentWeather() {
 					});
 
 	const weatherDisplay = getWeatherIcon(currWeather.rainIntensity);
-	weatherDisplay.tyres = rainTyres ? "Wet" : "Dry " + currentTyreSet;
+	weatherDisplay.tyres = rainTyres ? "Wet" : currentTyreSet ? "Dry " + currentTyreSet : "No tyre fitted";
 
 	return (
 		<div className="box data-box wide">
 			<h2>Current weather</h2>
 			<div className="data-row data">
-				<img src={weatherDisplay.icon} alt={`Current weather :${weatherDisplay.name} `} />
+				<object data={weatherDisplay.icon} type="image/png"></object>
 				{weatherDisplay.name}
 			</div>
 			<div className="data-row data">
