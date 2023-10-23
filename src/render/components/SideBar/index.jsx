@@ -53,14 +53,14 @@ function SideBar() {
 
 	return isOpen ? (
 		<>
-			<button className="open-settings-btn" onClick={() => transitionOn()}></button>
+			<button className="open-settings-btn" onClick={transitionOn}></button>
 			<div id="side-bar" className={isClosing ? "close" : null}>
 				<div id="app-info">
 					<a href="#">Send a bug report</a>
 					<p>App version 3.0.a</p>
 				</div>
 
-				<button onClick={() => transitionOff()} className="panel-fold-btn"></button>
+				<button onClick={transitionOff} className="panel-fold-btn"></button>
 				<img width="250" src={logo} alt="Wingman logo" />
 				<h2>Settings</h2>
 				<label id="username">
