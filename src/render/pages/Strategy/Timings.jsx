@@ -25,8 +25,8 @@ export default function Timings() {
 							value: currentDriver.name,
 						},
 						{
-							label: "Stint time remaining",
-							value: formatDuration(racingTimers.stintRemaining),
+							label: "Stint time left",
+							value: formatDuration(racingTimers.stintLeft),
 						},
 					]}
 				/>
@@ -35,7 +35,7 @@ export default function Timings() {
 				{drivers.length ? (
 					<Lines
 						data={drivers.map(driver => ({
-							label: `${driver.name} time remaining`,
+							label: `${driver.name} time left`,
 							value: driver.drivingTimeLeft,
 						}))}
 					/>

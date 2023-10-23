@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 export default function TimeInfo() {
 	const dispatch = useDispatch();
 
-	const currentTime = useSelector((state) => state.info.currentTime);
-	const sessionTimeLeft = useSelector((state) => state.info.sessionTimeLeft);
-	const lastUpdateTime = useSelector((state) => state.info.lastUpdateTime);
+	const currentTime = useSelector(state => state.info.currentTime);
+	const sessionTimeLeft = useSelector(state => state.info.sessionTimeLeft);
+	const lastUpdateTime = useSelector(state => state.info.lastUpdateTime);
 
-	const setCurrentTime = (newCT) => {
+	const setCurrentTime = newCT => {
 		dispatch(infoActions.updateCurrentTime(newCT));
 	};
 
-	const setTimeLeft = (newTL) => {
+	const setTimeLeft = newTL => {
 		dispatch(infoActions.updateTimeLeft(newTL));
 	};
 
@@ -23,16 +23,13 @@ export default function TimeInfo() {
 			<div className="time-row">
 				<p className="label">Current time :</p>
 				<p className="data">
-					<TimeTicker
-						$time={currentTime}></TimeTicker>
+					<TimeTicker $time={currentTime}></TimeTicker>
 				</p>
 			</div>
 			<div className="time-row">
-				<p className="label">Time remaining :</p>
+				<p className="label">Time left :</p>
 				<p className="data">
-					<TimeTicker
-						$time={sessionTimeLeft}
-						asc={false}></TimeTicker>
+					<TimeTicker $time={sessionTimeLeft} asc={false}></TimeTicker>
 				</p>
 			</div>
 			<div className="separator"></div>

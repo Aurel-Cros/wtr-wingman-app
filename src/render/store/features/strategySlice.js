@@ -5,7 +5,7 @@ export const strategySlice = createSlice({
 	initialState: {
 		flag: "AC_NO_FLAG",
 		racingTimers: {
-			stintRemaining: 0,
+			stintLeft: 0,
 			bestLap: 0,
 			previousLap: 0,
 			currentLap: 0,
