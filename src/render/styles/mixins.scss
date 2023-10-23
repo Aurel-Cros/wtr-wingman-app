@@ -1,26 +1,40 @@
+@use 'variables.scss' as v;
+
 @mixin GlassmorphMain {
-    background-color: rgba(255, 255, 255, 0.025);
-    backdrop-filter: blur(8px);
-    border: transparent;
+	background-color: rgba(255, 255, 255, 0.025);
+	backdrop-filter: blur(8px);
+	border: transparent;
 }
 
 @mixin GlassmorphMore {
-    background-color: rgba(122, 122, 122, 0.3);
-    backdrop-filter: blur(16px);
-    border: transparent;
+	background-color: rgba(122, 122, 122, 0.3);
+	backdrop-filter: blur(16px);
+	border: transparent;
 }
 
 @mixin Button {
-    content: "";
-    background-position: 50%;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+	content: "";
+	background-position: 50%;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	border-radius: 8px;
+	opacity: 0.8;
+	outline-offset: 4px;
+	outline: 2px solid transparent;
+	transition: opacity 100ms, outline 100ms, scale 50ms;
+	&:hover {
+		opacity: 1;
+		outline: 2px solid v.$accentPink;
+	}
+	&:active {
+		scale: 0.9;
+	}
 }
 
 @mixin Subtitle {
-    /* h3 */
-    font-family: Montserrat;
-    font-size: 1rem;
-    font-weight: 500;
-    font-variant: all-small-caps;
+	/* h3 */
+	font-family: Montserrat;
+	font-size: 1rem;
+	font-weight: 500;
+	font-variant: all-small-caps;
 }
