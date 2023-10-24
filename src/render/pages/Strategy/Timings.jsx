@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Lines from "../../components/Data/Lines";
-import { formatDelta, formatDuration, formatLaptime, formatTime } from "../../../common/util";
+import { formatDelta, formatDuration, formatLaptime } from "../../../common/util";
 
 export default function Timings() {
 	// Get data
