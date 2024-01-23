@@ -1,4 +1,5 @@
 import WebSocket from 'ws'
+import onData from './onData';
 
 export default class WebSocketManager {
     constructor(mainWindow) {
@@ -48,15 +49,13 @@ export default class WebSocketManager {
             this.mainWindow.webContents.send("WSState", true);
         })
 
-        this.on('message', (data) => {
-            console.log("Oh, j'ai reçu", data);
-        })
-
         this.on('close', () => {
             console.log('Connection closed. Attempting to reconnect.');
             this.isAlive = false;
             this.mainWindow.webContents.send("WSState", false);
         })
+
+        this.on('message', onData);
     }
 
     on(event, callback) {
