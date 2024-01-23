@@ -1,13 +1,10 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../initialState";
 
 export const settingsSlice = createSlice({
 	name: "settings",
 	initialState: {
-		username: localStorage.getItem("username") || null,
-		groupName: null,
-		timeFormat: localStorage.getItem("time-format") || 24,
-		speedUnit: localStorage.getItem("speed-unit") || "kph",
-		sendingRate: localStorage.getItem("sending-rate") || 100,
+		...initialState.settings
 	},
 	reducers: {
 		changeName: (state, action) => {

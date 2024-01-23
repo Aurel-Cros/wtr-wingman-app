@@ -1,43 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../initialState";
 
 export const strategySlice = createSlice({
 	name: "strategy",
 	initialState: {
-		flag: "AC_NO_FLAG",
-		racingTimers: {
-			stintLeft: 0,
-			bestLap: 0,
-			previousLap: 0,
-			currentLap: 0,
-			currentPred: 0,
-			deltaToBest: 0,
-			gapToFront: 0,
-			gapToBehind: 0,
-		},
-		pitMenu: {
-			damage: 0,
-			repairTime: 0,
-			repairBody: false,
-			repairSuspension: false,
-			tyres: {
-				change: true,
-				selectedType: "Wet",
-				pressures: [270, 270, 270, 270],
-			},
-			fuelToAdd: 120,
-			changeBrakes: false,
-			penaltyTime: 0,
-		},
-		fuel: {
-			tankSize: 120,
-			usedThisStint: 60,
-			remaining: 60,
-			perLap: 3,
-		},
-		tyres: {
-			lastPitValues: [260, 250, 260, 250],
-			// in psi*10 : 259 for 25.9 psi
-		},
+		...initialState.strategy
 	},
 	reducers: {
 		updateFlag: (state, { payload }) => {

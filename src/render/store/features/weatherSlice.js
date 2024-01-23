@@ -1,16 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../initialState";
 
 export const weatherSlice = createSlice({
 	name: "weather",
 	initialState: {
-		events: [],
-		liveData: {
-			windDirection: 0,
-			windSpeed: 0,
-			airTemp: 0,
-			roadTemp: 0,
-			trackStatus: null,
-		},
+		...initialState.weather
 	},
 	reducers: {
 		addWeatherEvent: (state, action) => {

@@ -1,16 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../initialState";
 
 export const infoSlice = createSlice({
 	name: "info",
 	initialState: {
-		duration: -1,
-		currentTime: -1,
-		sessionTimeLeft: -1,
-		lastUpdateTime: -1,
-		drivers: [], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
-		currentDriverId: null,
-		carModel: "Car model",
-		trackName: "Track name",
+		...initialState.info
 	},
 	reducers: {
 		setDuration: (state, { payload }) => {
