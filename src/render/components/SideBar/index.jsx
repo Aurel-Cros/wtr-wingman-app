@@ -12,8 +12,10 @@ function SideBar() {
 
 	const dispatch = useDispatch();
 
-	const updateUsername = e => {
-		const value = e.target.value;
+	const updateUsername = value => {
+		if (value == username)
+			return;
+
 		localStorage.setItem("username", value);
 		window.settings.setUsername(value);
 		dispatch(changeName(value));
@@ -65,7 +67,14 @@ function SideBar() {
 				<h2>Settings</h2>
 				<label id="username">
 					Username :
-					<input type="text" id="usernameInput" defaultValue={username} onBlur={updateUsername} />
+					<input type="text" id="usernameInput"
+						defaultValue={username}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								updateUsername(e.target.value)
+							}
+						}}
+						onBlur={(e) => { updateUsername(e.target.value) }} />
 				</label>
 
 				<div className="separator"></div>

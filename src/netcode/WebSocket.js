@@ -1,38 +1,61 @@
 import WebSocket from 'ws'
 
 export default class WebSocketManager {
-    constructor() {
+    constructor(mainWindow) {
         if (WebSocketManager.exists)
             return WebSocketManager.instance;
 
         WebSocketManager.exists = true;
         WebSocketManager.instance = this;
 
-        this.handshake() && this.initHandles();
+        this.isAlive = false;
+        this.deadDelay = 1000;
+        this._link = null;
+        this.mainWindow = mainWindow;
+
+        this.aliveLoop();
+    }
+
+    aliveLoop() {
+        const connect = () => {
+            if (this.isAlive)
+                return;
+            // Make sure the eventual current WebSocket is destroyed
+            this._link?.terminate();
+
+            console.log("Trying to establish connection.");
+            this.handshake();
+            this.initHandles();
+        };
+        setInterval(connect, this.deadDelay);
     }
 
     handshake() {
-        try {
-            const serverAddress = 'wss://localhost:8080';
-            this._link = new WebSocket(serverAddress, 'receiver');
-            return true
-        }
-        catch (err) {
-            console.log("Connection failure.", err);
-        }
+        const serverAddress = 'ws://localhost:8080';
+        console.log("Creating socket.")
+        this._link = new WebSocket(serverAddress, 'receiver');
     }
 
     initHandles() {
-        this._link.on('open', () => {
-            this._link.send('Coucou serveur !');
+        // This avoids the ugly pop-up message when server in unreachable
+        this.on('error', () => {
+            console.log('Server unreachable.')
+        });
+
+        this.on('open', () => {
+            console.log("Connection established.");
+            this.isAlive = true;
+            this.mainWindow.webContents.send("WSState", true);
         })
 
-        this._link.on('message', (data) => {
+        this.on('message', (data) => {
             console.log("Oh, j'ai reçu", data);
         })
 
-        this._link.on('close', () => {
-            console.log('Logging out');
+        this.on('close', () => {
+            console.log('Connection closed. Attempting to reconnect.');
+            this.isAlive = false;
+            this.mainWindow.webContents.send("WSState", false);
         })
     }
 
@@ -40,7 +63,8 @@ export default class WebSocketManager {
         this._link.on(event, callback)
     }
 
-    send(myString) {
-        this._link.send(myString);
+    send(data) {
+        const stringData = JSON.stringify(data);
+        this._link.send(stringData);
     }
 }

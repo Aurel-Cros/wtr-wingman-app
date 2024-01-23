@@ -139,15 +139,27 @@
             height: 1.25rem;
             border-radius: 50%;
             border: 1px solid v.$white1;
-            box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.25) inset, 2px 2px 4px 0px rgba(255, 255, 255, 0.25) inset;
+            box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.75) inset, 2px 2px 4px 0px rgba(255, 255, 255, 0.75) inset;
         }
 
         &.connected::before {
             background-color: v.$accentGreen;
+            animation: none;
         }
 
         &:not(.connected)::before {
             background-color: v.$accentRed;
+            animation: idle 1s infinite linear;
         }
+    }
+}
+
+@keyframes idle {
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: 360deg;
     }
 }

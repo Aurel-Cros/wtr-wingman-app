@@ -1,7 +1,8 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
-const path = require("path");
-const data = require("../data-sample.json");
-const ACCNW = require("acc-node-wrapper");
+import { app, BrowserWindow, ipcMain } from "electron";
+import ACCNW from "acc-node-wrapper";
+import WebSocketManager from "./netcode/WebSocket";
+import data from "../data-sample.json";
+
 const wrapper = new ACCNW();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -21,15 +22,35 @@ const createWindow = () => {
 	// and load the index.html of the app.
 	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+	// Start WebSocket connection
+	const WSClient = new WebSocketManager(mainWindow);
+
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools();
 
+	// Define listeners for user input
 	ipcMain.on("setUsername", (_event, name) => {
-		console.log("Username: ", name);
+		const payload = {
+			type: "username",
+			value: name
+		};
+		WSClient.send(payload);
 	});
-	ipcMain.on("setGroupName", (_event, name) => {
-		if (name) console.log("Group name: ", name);
-		else console.log("Quit group !");
+
+	ipcMain.on("setTeamName", (_event, name) => {
+		if (name) {
+			const payload = {
+				type: "user_team",
+				value: name
+			};
+			WSClient.send(payload);
+		}
+		else {
+			const payload = {
+				type: "leave_team"
+			};
+			WSClient.send(payload);
+		}
 	});
 
 	// wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);

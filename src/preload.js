@@ -7,6 +7,10 @@ contextBridge.exposeInMainWorld("settings", {
 	setGroupName: callback => ipcRenderer.send("setGroupName", callback),
 });
 
+contextBridge.exposeInMainWorld("connection", {
+	onWSState: callback => ipcRenderer.on("WSState", callback),
+});
+
 const dataChannels = [
 	"timeSync", // 0
 	"weatherEvent",
