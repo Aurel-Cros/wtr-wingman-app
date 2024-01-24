@@ -38,7 +38,7 @@
     "style-loader": "^3.3.3"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "^2",
     "acc-node-wrapper": "^1.0.6",
     "electron-squirrel-startup": "^1.0.0",
     "nanoid": "^5.0.4",

@@ -55,7 +55,7 @@ export default class WebSocketManager {
             this.mainWindow.webContents.send("WSState", false);
         })
 
-        this.on('message', onData);
+        this.on('message', onData.bind(this));
     }
 
     on(event, callback) {

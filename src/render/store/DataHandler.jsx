@@ -10,48 +10,56 @@ export default function DataHandler() {
 
 	window.dataAPI.clear();
 
-	window.dataAPI.onTimeSync((_e, time) => {
+	window.dataAPI.onFullUpdate(fullState => {
+		dispatch(weatherActions.setAll(fullState.weather));
+		dispatch(infoActions.setAll(fullState.info));
+		dispatch(telemetryActions.setAll(fullState.telemetry));
+		dispatch(strategyActions.setAll(fullState.strategy));
+		dispatch(infoActions.updateReceived());
+	})
+
+	window.dataAPI.onTimeSync(time => {
 		dispatch(infoActions.updateCurrentTime(time.currentTime));
 		dispatch(infoActions.updateTimeLeft(time.sessionTimeLeft));
 	});
 
-	window.dataAPI.onWeatherEvent((_e, newWeather) => {
+	window.dataAPI.onWeatherEvent(newWeather => {
 		dispatch(weatherActions.addWeatherEvent(newWeather));
 		dispatch(infoActions.updateReceived());
 	});
 
-	window.dataAPI.onWeatherLiveData((_e, newWeather) => {
+	window.dataAPI.onWeatherLiveData(newWeather => {
 		dispatch(weatherActions.updateLiveData(newWeather));
 		dispatch(infoActions.updateReceived());
 	});
 
-	window.dataAPI.onTeleElectronics((_e, newElectronics) => {
+	window.dataAPI.onTeleElectronics(newElectronics => {
 		dispatch(telemetryActions.updateElectronics(newElectronics));
 		dispatch(infoActions.updateReceived());
 	});
 
-	window.dataAPI.onTeleData((_e, newTelemetry) => {
+	window.dataAPI.onTeleData(newTelemetry => {
 		dispatch(telemetryActions.updateLiveData(newTelemetry));
 		dispatch(infoActions.updateReceived());
 	});
 
-	window.dataAPI.onTimingSync((_e, newTimings) => {
+	window.dataAPI.onTimingSync(newTimings => {
 		dispatch(strategyActions.updateRacingTimers(newTimings));
 	});
 
-	window.dataAPI.onTimingLive((_e, newTimings) => {
+	window.dataAPI.onTimingLive(newTimings => {
 		dispatch(strategyActions.updateRacingTimers(newTimings));
 	});
 
-	window.dataAPI.onPitSync((_e, newPits) => {
+	window.dataAPI.onPitSync(newPits => {
 		dispatch(strategyActions.updatePitMenu(newPits));
 	});
 
-	window.dataAPI.onFuelSync((_e, newFuel) => {
+	window.dataAPI.onFuelSync(newFuel => {
 		dispatch(strategyActions.updateFuel(newFuel));
 	});
 
-	window.dataAPI.onTyresSync((_e, newPressures) => {
+	window.dataAPI.onTyresSync(newPressures => {
 		dispatch(telemetryActions.updatePressures(newPressures));
 	});
 }

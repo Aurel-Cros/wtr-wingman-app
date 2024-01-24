@@ -1,5 +1,7 @@
 @use './variables.scss' as v;
-
+:root {
+    font-size: 12px;
+}
 body {
     background-color: v.$darkPurple;
 }

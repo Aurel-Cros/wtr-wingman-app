@@ -7,6 +7,9 @@ export const strategySlice = createSlice({
 		...initialState.strategy
 	},
 	reducers: {
+		setAll: (state, { payload }) => {
+			state = { ...state, ...payload }
+		},
 		updateFlag: (state, { payload }) => {
 			state.flag = payload;
 		},

@@ -7,6 +7,9 @@ export const telemetrySlice = createSlice({
 		...initialState.telemetry
 	},
 	reducers: {
+		setAll: (state, { payload }) => {
+			state = { ...state, ...payload }
+		},
 		updatePressures: (state, { payload }) => {
 			state.tyres.livePressures = payload.pressures;
 			state.tyres.pressuresHistory.push({ pressures: payload.pressures, timestamp: payload.timestamp });

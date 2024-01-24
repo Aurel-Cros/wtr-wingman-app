@@ -4,9 +4,11 @@
     @include m.GlassmorphMain;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 5%;
     padding-top: 0.44rem;
     padding-bottom: 0.44rem;
+    width: 100%;
 
     a {
         padding: 0.31rem 0.9rem;

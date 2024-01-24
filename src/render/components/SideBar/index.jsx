@@ -22,16 +22,25 @@ function SideBar() {
 	};
 	const updateTimeFormat = e => {
 		const value = e.target.value;
+		if (value == timeFormat)
+			return;
+
 		localStorage.setItem("time-format", value);
 		dispatch(changeTimeFormat(value));
 	};
 	const updateSpeedUnit = e => {
 		const value = e.target.value;
+		if (value == speedUnit)
+			return;
+
 		localStorage.setItem("speed-unit", value);
 		dispatch(changeSpeedUnit(value));
 	};
 	const updateSendingRate = e => {
 		const value = e.target.value;
+		if (value == sendingRate)
+			return;
+
 		localStorage.setItem("sending-rate", value);
 		dispatch(changeSendingRate(value));
 	};
@@ -68,6 +77,7 @@ function SideBar() {
 				<label id="username">
 					Username :
 					<input type="text" id="usernameInput"
+						placeholder="Enter your username"
 						defaultValue={username}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {

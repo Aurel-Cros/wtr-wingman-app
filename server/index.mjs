@@ -1,5 +1,7 @@
 import WebSocket from 'ws';
 import { nanoid } from 'nanoid';
+import initialState from './initialState.mjs';
+import newName from './randomName/randomName.mjs';
 
 const version = "^3.0.0";
 const server = new WebSocket.Server({ port: 8080 });
@@ -8,7 +10,9 @@ const teams = new Map();
 
 server.on('connection', (client) => {
     client.id = nanoid();
-    console.log("New client : ", client.id);
+    client.name = newName();
+
+    console.log("New client :", client.name);
     client.send(JSON.stringify({
         type: "version",
         value: version
@@ -20,33 +24,47 @@ server.on('connection', (client) => {
 
         switch (data.type) {
             case 'username':
-                client.name = data.value;
+                const oldName = client.name;
+
+                if (data.value)
+                    client.name = data.value;
+                else
+                    client.name = newName();
+
+                console.log(oldName, "is now", client.name)
                 break;
 
             case 'user_team':
                 if (!teams.has(data.value)) {
-                    console.log("Creating team", data.value)
+                    console.log("Creating team :", data.value)
                     teams.set(data.value, new Set());
+
+                    // Initialize the team history
+                    const team = teams.get(data.value);
+                    team.current = { ...initialState };
+                    team.name = data.value;
                 }
 
                 const team = teams.get(data.value);
                 team.add(client);
-                client.team = {
-                    name: data.value,
-                    users: team
-                };
+                client.team = team;
+                client.send(JSON.stringify({
+                    type: "fullUpdate",
+                    value: team.current
+                }))
                 break;
 
             case 'leave_team':
-                client.team.users.delete(client);
-                if (client.team.users.size < 1)
-                    teams.delete(client.team.name);
-                client.team = null;
+                leaveTeam(client);
                 break;
 
-            case 'data':
-                clients.forEach(aClient => {
-                    aClient.send(stringData);
+            case 'update':
+                client.team.current = {
+                    ...client.team.current,
+                    ...data.value
+                }
+                client.team.forEach(teammate => {
+                    teammate.send(stringData);
                 })
                 break;
         }
@@ -54,7 +72,18 @@ server.on('connection', (client) => {
 
     client.on('close', () => {
         console.log("Client closed socket.");
+        leaveTeam(client);
     })
 })
+
+const leaveTeam = (client) => {
+    if (!client.team)
+        return
+
+    client.team.delete(client);
+    if (client.team.size < 1)
+        teams.delete(client.team.name);
+    client.team = null;
+}
 
 console.log("Server up");

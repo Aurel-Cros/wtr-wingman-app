@@ -8,6 +8,8 @@ export default function Telemetry() {
         <>
             <div className="layout-col">
                 <Electronics />
+            </div>
+            <div className="layout-col">
                 <Brakes />
             </div>
             <div className="layout-col">

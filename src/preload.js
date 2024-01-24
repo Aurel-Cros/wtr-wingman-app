@@ -1,10 +1,10 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-const { contextBridge, ipcRenderer } = require("electron");
+import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("settings", {
 	setUsername: callback => ipcRenderer.send("setUsername", callback),
-	setGroupName: callback => ipcRenderer.send("setGroupName", callback),
+	setTeamName: callback => ipcRenderer.send("setTeamName", callback)
 });
 
 contextBridge.exposeInMainWorld("connection", {
@@ -22,20 +22,22 @@ const dataChannels = [
 	"pitStratSync",
 	"fuelSync",
 	"tyresSync",
+	"fullUpdate" // 10
 ];
 contextBridge.exposeInMainWorld("dataAPI", {
-	onTimeSync: callback => ipcRenderer.on(dataChannels[0], callback),
-	onWeatherEvent: callback => ipcRenderer.on(dataChannels[1], callback),
-	onWeatherLiveData: callback => ipcRenderer.on(dataChannels[2], callback),
-	onTeleElectronics: callback => ipcRenderer.on(dataChannels[3], callback),
-	onTeleData: callback => ipcRenderer.on(dataChannels[4], callback),
-	onTimingSync: callback => ipcRenderer.on(dataChannels[5], callback),
-	onTimingLive: callback => ipcRenderer.on(dataChannels[6], callback),
-	onPitSync: callback => ipcRenderer.on(dataChannels[7], callback),
-	onFuelSync: callback => ipcRenderer.on(dataChannels[8], callback),
-	onTyresSync: callback => ipcRenderer.on(dataChannels[9], callback),
+	onTimeSync: callback => ipcRenderer.on(dataChannels[0], (_event, value) => callback(value)),
+	onWeatherEvent: callback => ipcRenderer.on(dataChannels[1], (_event, value) => callback(value)),
+	onWeatherLiveData: callback => ipcRenderer.on(dataChannels[2], (_event, value) => callback(value)),
+	onTeleElectronics: callback => ipcRenderer.on(dataChannels[3], (_event, value) => callback(value)),
+	onTeleData: callback => ipcRenderer.on(dataChannels[4], (_event, value) => callback(value)),
+	onTimingSync: callback => ipcRenderer.on(dataChannels[5], (_event, value) => callback(value)),
+	onTimingLive: callback => ipcRenderer.on(dataChannels[6], (_event, value) => callback(value)),
+	onPitSync: callback => ipcRenderer.on(dataChannels[7], (_event, value) => callback(value)),
+	onFuelSync: callback => ipcRenderer.on(dataChannels[8], (_event, value) => callback(value)),
+	onTyresSync: callback => ipcRenderer.on(dataChannels[9], (_event, value) => callback(value)),
+	onFullUpdate: callback => ipcRenderer.on(dataChannels[10], (_event, value) => callback(value)),
 	clear: (channels = dataChannels) =>
 		channels.forEach(channel => {
 			if (dataChannels.includes(channel)) ipcRenderer.removeAllListeners(channel);
-		}),
+		})
 });

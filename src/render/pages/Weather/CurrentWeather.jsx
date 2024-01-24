@@ -13,16 +13,16 @@ export default function CurrentWeather() {
 		weatherEvents.length < 1
 			? {}
 			: weatherEvents
-					.toSorted((a, b) => a.timestamp - b.timestamp)
-					.find((a, i) => {
-						return a.timestamp < currentTime && weatherEvents[i + 1].timestamp > currentTime;
-					});
+				.toSorted((a, b) => a.timestamp - b.timestamp)
+				.find((a, i) => {
+					return a.timestamp < currentTime && weatherEvents[i + 1].timestamp > currentTime;
+				});
 
 	const weatherDisplay = getWeatherIcon(currWeather.rainIntensity);
 	weatherDisplay.tyres = rainTyres ? "Wet" : currentTyreSet ? "Dry " + currentTyreSet : "No tyre fitted";
 
 	return (
-		<div className="box data-box wide">
+		<div className="box data-box">
 			<h2>Current weather</h2>
 			<div className="data-row data">
 				<object data={weatherDisplay.icon} type="image/png"></object>
