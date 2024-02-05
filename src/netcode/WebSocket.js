@@ -1,8 +1,13 @@
 import WebSocket from 'ws'
-import onData from './onData';
+import { DataAction } from '../events/subscribers/DataSubscriber';
 import dispatcher from '../events/dispatcher';
 import { WSStateAction } from '../events/subscribers/MainWindowSubscriber';
 
+/**
+ * This handles the WebSocket connection.
+ * It initiates the connection and its event listeners.
+ * It makes sure the connection is always alive and recreates it when it dies.
+ */
 export default class WebSocketManager {
     constructor() {
         if (WebSocketManager.exists)
@@ -56,7 +61,10 @@ export default class WebSocketManager {
             dispatcher.fire('WSState', WSStateAction(false));
         })
 
-        this.on('message', onData.bind(this));
+        this.on('message', stringData => {
+
+            dispatcher.fire('data', DataAction(stringData))
+        });
     }
 
     on(event, callback) {

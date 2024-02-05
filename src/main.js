@@ -4,6 +4,7 @@ import data from "../data-sample.json";
 import SharedMemoryHandler from "./SharedMemoryAccess/SharedMemoryHandler";
 import MainWindowSubscriber from "./events/subscribers/MainWindowSubscriber.js";
 import dispatcher from "./events/dispatcher.js";
+import DataSubscriber from "./events/subscribers/DataSubscriber.js";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -22,10 +23,16 @@ const createWindow = () => {
 	// and load the index.html of the app.
 	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-	const subscriber = new MainWindowSubscriber(mainWindow);
-	subscriber.subscribe('WSState');
+	// Initialize the event handler for the main window
+	const windowSubscriber = new MainWindowSubscriber(mainWindow);
+	windowSubscriber.subscribe('WSState');
+
 	// Start WebSocket connection
 	const WSClient = new WebSocketManager();
+
+	// Initialize the event handler for the WebSocket input
+	const WSSubscriber = new DataSubscriber();
+	WSSubscriber.subscribe('data');
 
 
 	// Open the DevTools.
@@ -35,8 +42,11 @@ const createWindow = () => {
 	// Start connection to the game's shared memory
 	const sharedMemory = new SharedMemoryHandler();
 
-	sharedMemory.initGraphics(result => { });
-
+	/**
+	 * 
+	 * NEEDS REFACTORING FOR EVENT BASED LOGIC
+	 * ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
+	 */
 	// Define listeners for user input
 	ipcMain.on("setUsername", (_event, name) => {
 		const payload = {
