@@ -1,8 +1,10 @@
 import WebSocket from 'ws'
 import onData from './onData';
+import dispatcher from '../events/dispatcher';
+import { WSStateAction } from '../events/subscribers/MainWindowSubscriber';
 
 export default class WebSocketManager {
-    constructor(mainWindow) {
+    constructor() {
         if (WebSocketManager.exists)
             return WebSocketManager.instance;
 
@@ -12,7 +14,6 @@ export default class WebSocketManager {
         this.isAlive = false;
         this.deadDelay = 1000;
         this._link = null;
-        this.mainWindow = mainWindow;
 
         this.aliveLoop();
     }
@@ -46,13 +47,13 @@ export default class WebSocketManager {
         this.on('open', () => {
             console.log("Connection established.");
             this.isAlive = true;
-            this.mainWindow.webContents.send("WSState", true);
+            dispatcher.fire('WSState', WSStateAction(true));
         })
 
         this.on('close', () => {
             console.log('Connection closed. Attempting to reconnect.');
             this.isAlive = false;
-            this.mainWindow.webContents.send("WSState", false);
+            dispatcher.fire('WSState', WSStateAction(false));
         })
 
         this.on('message', onData.bind(this));

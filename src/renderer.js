@@ -5,15 +5,15 @@
  *
  * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
  */
-import "./render/styles/element.scss";
-import "./render/styles/layout.scss";
-import "./render/styles/text.scss";
-import "./render/styles/background.scss";
+import "./vue/styles/element.scss";
+import "./vue/styles/layout.scss";
+import "./vue/styles/text.scss";
+import "./vue/styles/background.scss";
 
 import "./common/util";
 
-import {createRoot} from "react-dom/client";
-import App from "./render/App";
+import { createRoot } from "react-dom/client";
+import App from "./vue/App";
 
 const domRoot = document.querySelector("#root");
 const root = createRoot(domRoot);

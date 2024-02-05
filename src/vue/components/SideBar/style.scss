@@ -1,4 +1,4 @@
-@use '/src/render/styles/mixins.scss' as m;
+@use '/src/vue/styles/mixins.scss' as m;
 
 #side-bar {
 	@include m.GlassmorphMore;

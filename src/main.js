@@ -1,9 +1,9 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import ACCNW from "acc-node-wrapper";
 import WebSocketManager from "./netcode/WebSocket";
 import data from "../data-sample.json";
-
-const wrapper = new ACCNW();
+import SharedMemoryHandler from "./SharedMemoryAccess/SharedMemoryHandler";
+import MainWindowSubscriber from "./events/subscribers/MainWindowSubscriber.js";
+import dispatcher from "./events/dispatcher.js";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -22,11 +22,20 @@ const createWindow = () => {
 	// and load the index.html of the app.
 	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+	const subscriber = new MainWindowSubscriber(mainWindow);
+	subscriber.subscribe('WSState');
 	// Start WebSocket connection
-	const WSClient = new WebSocketManager(mainWindow);
+	const WSClient = new WebSocketManager();
+
 
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools();
+
+
+	// Start connection to the game's shared memory
+	const sharedMemory = new SharedMemoryHandler();
+
+	sharedMemory.initGraphics(result => { });
 
 	// Define listeners for user input
 	ipcMain.on("setUsername", (_event, name) => {
@@ -52,16 +61,14 @@ const createWindow = () => {
 			WSClient.send(payload);
 		}
 	});
-
-	// wrapper.initSharedMemory(10, 1000, 60 * 60 * 1000, false);
-	// wrapper.initBroadcastSDK("Max", "127.0.0.1", 9000, "123", "123", 1000, true);
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-	createWindow();
+	try { createWindow(); }
+	catch (err) { console.error(err) }
 
 	// On OS X it's common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
