@@ -8,7 +8,15 @@ export const infoSlice = createSlice({
 	},
 	reducers: {
 		setAll: (state, { payload }) => {
-			state = { ...state, ...payload }
+			console.log("Updating info")
+			state.drivers = payload.drivers
+			state.duration = payload.duration;
+			state.currentTime = payload.currentTime;
+			state.sessionTimeLeft = payload.sessionTimeLeft;
+			state.carModel = payload.carModel;
+			state.trackName = payload.trackName;
+			state.drivers = payload.drivers;
+			state.currentDriverId = payload.currentDriverId;
 		},
 		setDuration: (state, { payload }) => {
 			state.duration = payload;
@@ -24,16 +32,16 @@ export const infoSlice = createSlice({
 			state.lastUpdateTime = state.currentTime;
 		},
 		updateCar: (state, { payload }) => {
-			state.carModel = payload
+			state.carModel = payload;
 		},
 		updateTrack: (state, { payload }) => {
-			state.trackName = payload
+			state.trackName = payload;
 		},
 		setDrivers: (state, { payload }) => {
-			state.drivers = payload
+			state.drivers = payload;
 		},
 		setCurrentDriverId: (state, { payload }) => {
-			state.currentDriverId = payload
+			state.currentDriverId = payload;
 		}
 	},
 });

@@ -47,6 +47,10 @@ server.on('connection', (client) => {
 
                 const team = teams.get(data.value);
                 team.add(client);
+                team.current.info.drivers.push({
+                    id: client.id,
+                    name: client.name
+                });
                 client.team = team;
                 client.send(JSON.stringify({
                     type: "fullUpdate",
@@ -79,10 +83,13 @@ server.on('connection', (client) => {
 const leaveTeam = (client) => {
     if (!client.team)
         return
+    const team = client.team;
 
-    client.team.delete(client);
-    if (client.team.size < 1)
-        teams.delete(client.team.name);
+    team.current.info.drivers = team.current.info.drivers.filter(d => d.id != client.id);
+
+    team.delete(client);
+    if (team.size < 1)
+        teams.delete(team.name);
     client.team = null;
 }
 

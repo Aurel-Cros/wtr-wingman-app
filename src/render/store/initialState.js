@@ -4,7 +4,7 @@ const initialState = {
         currentTime: -1,
         sessionTimeLeft: -1,
         lastUpdateTime: -1,
-        drivers: [], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
+        drivers: [{ id: 1234, name: "Margot The Grand Destroyer of Asses", drivingTimeLeft: 123 }], // [{id: 0, name: 'Driver 1', drivingTimeLeft: 1345}]
         currentDriverId: null,
         carModel: "Car model",
         trackName: "Track name",
@@ -29,7 +29,7 @@ const initialState = {
             tyres: {
                 change: true,
                 selectedType: "Wet",
-                pressures: [0,0,0,0],
+                pressures: [0, 0, 0, 0],
             },
             fuelToAdd: 0,
             changeBrakes: false,

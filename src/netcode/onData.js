@@ -1,6 +1,5 @@
 export default function onData(stringData) {
     const data = JSON.parse(stringData);
-    console.log(data)
 
     switch (data.type) {
         case "version":
@@ -13,10 +12,11 @@ export default function onData(stringData) {
 
         case "fullUpdate":
             this.mainWindow.webContents.send('fullUpdate', data.value);
+            console.log("Full update received.")
             break;
 
         default:
-            console.log("CPT ?");
+            console.log("Unknown data received");
             break;
     }
 }

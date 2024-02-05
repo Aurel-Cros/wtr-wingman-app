@@ -53,8 +53,6 @@ h3 {
 	font-size: 0.875rem;
 	font-weight: 500;
 	font-variant: all-small-caps;
-	font-style: normal;
-	line-height: normal;
 }
 
 .data {
@@ -63,23 +61,23 @@ h3 {
 	/* key info */
 	font-family: Fira Code;
 	font-size: 1rem;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+}
+
+.offtext {
+	color: v.$white2;
+	font-family: Montserrat;
 }
 
 .subtext {
 	color: v.$white2;
 	font-family: Montserrat;
 	font-size: 0.75rem;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
 }
 
 .center {
 	text-align: center;
 }
+
 .right {
 	text-align: end;
 }
