@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { shortString } from "../../../common/util";
 
 export default function GroupInfo() {
     const drivers = useSelector(state => state.info.drivers);
@@ -6,7 +7,7 @@ export default function GroupInfo() {
     const car = useSelector(state => state.info.carModel);
     const track = useSelector(state => state.info.trackName);
 
-    const maxNameLength = 20
+    const maxNameLength = 15
 
     return (
         <div className="box" id="group-info">
@@ -17,7 +18,7 @@ export default function GroupInfo() {
                         drivers.length ? drivers.map(driver => {
                             return (
                                 <span key={driver.id} className={"subtext" + (driver.id === currentDriverId ? " active" : '')}>
-                                    {driver.name.slice(0, maxNameLength) + (driver.name.length > maxNameLength ? "..." : "")}
+                                    {shortString(driver.name, maxNameLength)}
                                 </span>)
                         }
                         )

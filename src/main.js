@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain } from "electron";
-import WebSocketManager from "./netcode/WebSocket";
+import { app, BrowserWindow } from "electron";
+import { WebSocketWrapper } from "./netcode/WebSocket";
 import data from "../data-sample.json";
 import SharedMemoryHandler from "./SharedMemoryAccess/SharedMemoryHandler";
 import MainWindowSubscriber from "./events/subscribers/MainWindowSubscriber.js";
-import dispatcher from "./events/dispatcher.js";
-import DataSubscriber from "./events/subscribers/DataSubscriber.js";
+import WebSocketSubscriber from "./events/subscribers/WebSocketSubscriber.js";
+import { UserInHandler } from "./events/userInputsHandler.js";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -25,52 +25,23 @@ const createWindow = () => {
 
 	// Initialize the event handler for the main window
 	const windowSubscriber = new MainWindowSubscriber(mainWindow);
-	windowSubscriber.subscribe('WSState');
-
-	// Start WebSocket connection
-	const WSClient = new WebSocketManager();
+	windowSubscriber.subscribe(['WSState', 'fullUpdate']);
 
 	// Initialize the event handler for the WebSocket input
-	const WSSubscriber = new DataSubscriber();
+	const WSSubscriber = new WebSocketSubscriber();
 	WSSubscriber.subscribe('data');
 
+	// Start WebSocket connection
+	WebSocketWrapper.initAliveLoop();
+
+	// Initialize user listeners
+	UserInHandler.init();
 
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools();
 
-
 	// Start connection to the game's shared memory
 	const sharedMemory = new SharedMemoryHandler();
-
-	/**
-	 * 
-	 * NEEDS REFACTORING FOR EVENT BASED LOGIC
-	 * ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
-	 */
-	// Define listeners for user input
-	ipcMain.on("setUsername", (_event, name) => {
-		const payload = {
-			type: "username",
-			value: name
-		};
-		WSClient.send(payload);
-	});
-
-	ipcMain.on("setTeamName", (_event, name) => {
-		if (name) {
-			const payload = {
-				type: "user_team",
-				value: name
-			};
-			WSClient.send(payload);
-		}
-		else {
-			const payload = {
-				type: "leave_team"
-			};
-			WSClient.send(payload);
-		}
-	});
 };
 
 // This method will be called when Electron has finished

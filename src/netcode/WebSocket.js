@@ -1,5 +1,5 @@
 import WebSocket from 'ws'
-import { DataAction } from '../events/subscribers/DataSubscriber';
+import { DataAction } from '../events/subscribers/WebSocketSubscriber';
 import dispatcher from '../events/dispatcher';
 import { WSStateAction } from '../events/subscribers/MainWindowSubscriber';
 
@@ -8,7 +8,7 @@ import { WSStateAction } from '../events/subscribers/MainWindowSubscriber';
  * It initiates the connection and its event listeners.
  * It makes sure the connection is always alive and recreates it when it dies.
  */
-export default class WebSocketManager {
+class WebSocketManager {
     constructor() {
         if (WebSocketManager.exists)
             return WebSocketManager.instance;
@@ -19,11 +19,9 @@ export default class WebSocketManager {
         this.isAlive = false;
         this.deadDelay = 1000;
         this._link = null;
-
-        this.aliveLoop();
     }
 
-    aliveLoop() {
+    initAliveLoop() {
         const connect = () => {
             if (this.isAlive)
                 return;
@@ -62,7 +60,6 @@ export default class WebSocketManager {
         })
 
         this.on('message', stringData => {
-
             dispatcher.fire('data', DataAction(stringData))
         });
     }
@@ -71,8 +68,14 @@ export default class WebSocketManager {
         this._link.on(event, callback)
     }
 
+    /**
+     * 
+     * @param {Object} data 
+     */
     send(data) {
         const stringData = JSON.stringify(data);
-        this._link.send(stringData);
+        this._link.send(Buffer.from(stringData));
     }
 }
+
+export const WebSocketWrapper = new WebSocketManager();

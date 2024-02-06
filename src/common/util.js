@@ -51,3 +51,5 @@ export const formatWeather = weather => {
 	return weather.substring(4).replace("_", " ");
 };
 export const getVersion = () => process.env.getVersion();
+
+export const shortString = (string, maxLength) => string.slice(0, maxLength) + (string.length > maxLength ? "..." : "");

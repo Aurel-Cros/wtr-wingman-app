@@ -13,10 +13,10 @@ server.on('connection', (client) => {
     client.name = newName();
 
     console.log("New client :", client.name);
-    client.send(JSON.stringify({
+    client.send(Buffer.from(JSON.stringify({
         type: "version",
         value: version
-    }));
+    })));
 
     client.on('message', (stringData) => {
         const data = JSON.parse(stringData);

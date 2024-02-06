@@ -1,14 +1,15 @@
+import dispatcher from "../dispatcher";
 import AbstractSubscriber from "./AbstractSubscriber";
+import { fullUpdateAction } from "./MainWindowSubscriber";
 
 /**
  * This subscriber handles events that involve data received from the server.
  * As the data going through the WebSocket can only be a string, the action integrates a JSON.parse()
  */
-export default class DataSubscriber extends AbstractSubscriber {
+export default class WebSocketSubscriber extends AbstractSubscriber {
     trigger(action) {
 
         const data = action.value;
-        console.log(action);
 
         switch (action.type) {
             case "version":
@@ -16,12 +17,13 @@ export default class DataSubscriber extends AbstractSubscriber {
                 break;
 
             case "update":
-                // this.mainWindow.webContents.send(data.channel, data);
+                console.log("Partial update received.")
+                dispatcher.fire('update', updateAction(data));
                 break;
 
             case "fullUpdate":
-                // this.mainWindow.webContents.send('fullUpdate', data);
                 console.log("Full update received.")
+                dispatcher.fire('fullUpdate', fullUpdateAction(data));
                 break;
 
             default:

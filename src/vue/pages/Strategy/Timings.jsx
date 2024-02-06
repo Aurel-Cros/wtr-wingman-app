@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Lines from "../../components/Data/Lines";
-import { formatDelta, formatDuration, formatLaptime } from "../../../common/util";
+import { formatDelta, formatDuration, formatLaptime, shortString } from "../../../common/util";
 
 export default function Timings() {
 	// Get data
@@ -22,7 +22,7 @@ export default function Timings() {
 					data={[
 						{
 							label: "Current driver",
-							value: currentDriver.name,
+							value: shortString(currentDriver.name, 15),
 						},
 						{
 							label: "Stint time left",
@@ -35,7 +35,7 @@ export default function Timings() {
 				{drivers.length ? (
 					<Lines
 						data={drivers.map(driver => ({
-							label: `${driver.name} time left`,
+							label: `${shortString(driver.name, 10)} time left`,
 							value: driver.drivingTimeLeft,
 						}))}
 					/>

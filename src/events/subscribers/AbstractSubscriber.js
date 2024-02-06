@@ -7,6 +7,9 @@ export default class AbstractSubscriber {
         throw new Error('Trigger is not defined.')
     }
     subscribe(channel) {
-        dispatcher.addSubscriber(channel, this);
+        if (channel instanceof Array)
+            channel.forEach(c => dispatcher.addSubscriber(c, this))
+        else
+            dispatcher.addSubscriber(channel, this);
     }
 }

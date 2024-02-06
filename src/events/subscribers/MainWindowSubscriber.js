@@ -14,10 +14,18 @@ export default class MainWindowSubscriber extends AbstractSubscriber {
             case 'WSState':
                 this.mainWindow.webContents.send('WSState', action.value);
                 break;
+            case 'fullUpdate':
+                this.mainWindow.webContents.send('fullUpdate', action.value)
+                break;
+            case 'update':
+                this.mainWindow.webContents.send(action.value.channel, action.value)
+                break;
         }
     }
 }
 
-export const { WSStateAction } = {
-    WSStateAction: (value) => ({ type: 'WSState', value: value })
+export const { WSStateAction, fullUpdateAction } = {
+    WSStateAction: (value) => ({ type: 'WSState', value }),
+    fullUpdateAction: (value) => ({ type: 'fullUpdate', value }),
+    updateAction: (value) => ({ type: 'update', value }),
 }
