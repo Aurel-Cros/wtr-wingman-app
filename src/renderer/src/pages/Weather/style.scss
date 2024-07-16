@@ -1,0 +1,42 @@
+.foldable {
+	overflow-y: scroll;
+	max-height: 250px;
+	padding-right: 0.5rem;
+	margin-right: -0.2rem;
+	transition: all 300ms ease-in-out;
+
+	&.fold {
+		max-height: 0px;
+	}
+}
+.weather-event {
+	width: 100%;
+	p {
+		margin: 0.3rem 0;
+		&.full {
+			width: 100%;
+		}
+	}
+}
+.weather-col {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.weather-row {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+.forecast-list {
+	flex-direction: column-reverse;
+}
+
+.green img {
+	filter: invert(30%) sepia(76%) saturate(2940%) hue-rotate(77deg) brightness(87%) contrast(94%);
+}
+
+.red img {
+	filter: invert(75%) sepia(83%) saturate(2256%) hue-rotate(342deg) brightness(104%) contrast(113%);
+}

@@ -1,0 +1,103 @@
+@use './variables.scss' as v;
+@use './mixins.scss' as m;
+
+@font-face {
+	font-family: Montserrat;
+	src: url("../assets/fonts/Montserrat-Variable.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: Fira Code;
+	src: url("../assets/fonts/FiraCode-VF.ttf") format("truetype");
+}
+
+:root {
+	font-size: 100%;
+}
+
+body {
+	font-family: Montserrat, Roboto, Arial, sans-serif;
+	color: v.$white2;
+}
+
+a {
+	color: v.$white1;
+}
+
+label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-variant: all-small-caps;
+	font-style: normal;
+	line-height: normal;
+}
+
+h2 {
+	text-align: center;
+	font-family: Montserrat;
+	font-size: 1.5rem;
+	font-weight: 500;
+	font-variant: small-caps;
+	font-style: normal;
+	line-height: normal;
+}
+
+h3 {
+	@include m.Subtitle;
+}
+
+.label {
+	color: v.$accentPink;
+
+	font-family: Montserrat;
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-variant: all-small-caps;
+}
+
+.data {
+	color: v.$white1;
+
+	/* key info */
+	font-family: Fira Code;
+	font-size: 1rem;
+}
+
+.offtext {
+	color: v.$white2;
+	font-family: Montserrat;
+}
+
+.subtext {
+	color: v.$white2;
+	font-family: Montserrat;
+	font-size: 0.75rem;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: end;
+}
+
+.red {
+	color: v.$accentRed;
+}
+
+.green {
+	color: v.$accentGreen;
+}
+
+.blue {
+	color: v.$accentBlue;
+}
+
+.yellow {
+	color: v.$accentYellow;
+}
+
+.bold {
+	font-weight: bold;
+}
