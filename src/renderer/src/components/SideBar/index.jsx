@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/images/wingman-logo.png";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +61,18 @@ function SideBar() {
 			setIsOpen(false);
 		}, 255);
 	};
+	const handleEscapeKey = e => {
+		if (e.key === "Escape")
+			transitionOff();
+	}
+
+	useEffect(() => {
+		document.addEventListener("keydown", handleEscapeKey, false);
+
+		return () => {
+			document.removeEventListener("keydown", handleEscapeKey, false);
+		};
+	}, [handleEscapeKey]);
 
 	return isOpen ? (
 		<>

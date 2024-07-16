@@ -1,10 +1,10 @@
-import WebSocket from 'ws';
+import { WebSocketServer } from 'ws';
 import { nanoid } from 'nanoid';
 import initialState from './initialState.mjs';
 import newName from './randomName/randomName.mjs';
 
 const version = "^3.0.0";
-const server = new WebSocket.Server({ port: 8080 });
+const server = new WebSocketServer({ port: 8080 });
 const clients = server.clients;
 const teams = new Map();
 
